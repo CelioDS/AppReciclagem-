@@ -160,7 +160,6 @@ export default function Home() {
           </select>
         </div>
 
-
         <Input
           text="DESCRIÇÃO"
           placeholder="Descrição"
@@ -177,8 +176,9 @@ export default function Home() {
           name="valor"
           className={style.input}
         />
-
-        <button type="submit">SALVAR</button>
+        <div>
+          <button type="submit">SALVAR</button>
+        </div>
       </form>
       <section>
         <table>
