@@ -54,7 +54,15 @@ export default function Home() {
   }, [setArrayDB]);
 
   useEffect(() => {
-    setCaixa(0);
+    setCaixa(
+      arrayDB.reduce((acumulador, data) => {
+        if (data.movimentacao === "Caixa") {
+          return acumulador + data.valor;
+        } else {
+          return acumulador;
+        }
+      }, 0)
+    );
     setEntrada(
       arrayDB.reduce((acumulador, data) => {
         if (data.movimentacao === "entrada") {
@@ -110,7 +118,6 @@ export default function Home() {
 
   return (
     <main className={style.main}>
-      <h1>Fluxo de caixa</h1>
       <header>
         <div>
           <h1>ENTRADA</h1>
@@ -168,36 +175,40 @@ export default function Home() {
           name="valor"
           className={style.input}
         />
-        <Input type="submit" className={style.input} />
-      </form>
 
-      <table>
-        <thead>
-          <tr>
-            <th>data</th>
-            <th>movimentação</th>
-            <th>descrição</th>
-            <th>valor</th>
-          </tr>
-        </thead>
-        <tbody>
-          {arrayDB.map((dado, id) => (
-            <tr
-              key={id}
-              style={
-                dado.movimentacao === "entrada"
-                  ? { background: "#008000" }
-                  : { background: "#800303fb" }
-              }
-            >
-              <td>{dado.dataNew}</td>
-              <td>{dado.movimentacao}</td>
-              <td>{dado.descricao}</td>
-              <td>{dado.valor}</td>
+        <button type="submit">SALVAR</button>
+      </form>
+      <section>
+        <table>
+          <thead>
+            <tr>
+              <th>data</th>
+              <th>movimentação</th>
+              <th>descrição</th>
+              <th>valor</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {arrayDB.map((dado, id) => (
+              <tr
+                key={id}
+                style={
+                  dado.movimentacao === "entrada"
+                    ? { background: "#008000" }
+                    : dado.movimentacao === "saida"
+                    ? { background: "#800303fb" }
+                    : { background: "#0099ff" } // Terceiro valor para outra movimentação
+                }
+              >
+                <td>{dado.dataNew}</td>
+                <td>{dado.movimentacao}</td>
+                <td>{dado.descricao}</td>
+                <td>{dado.valor}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
     </main>
   );
 }

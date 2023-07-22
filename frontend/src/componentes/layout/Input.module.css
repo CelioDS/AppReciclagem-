@@ -12,6 +12,7 @@
   color: #000000;
   text-align: center;
   font-weight: bolder;
+  font-size: 26px;
 }
 .father > input {
   color: #000000;
@@ -20,11 +21,8 @@
 }
 .father > input::placeholder {
   color: #9e9b9b;
-  padding: 18px;
+  width: 100%;
   text-align: center;
+  font-size: 26px;
 }
-.father > input[type="submit"] {
-  width: 150px;
-  padding: 8px 16px;
-  cursor: pointer;
-}
+

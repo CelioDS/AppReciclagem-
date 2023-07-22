@@ -33,9 +33,7 @@
 }
 .main header div span h1 {
   backdrop-filter: blur(8px); /* Desfoque para criar o efeito de vidro */
-
   border-radius: 10px;
-
   text-align: center;
   color: white; /* Cor do texto para melhor visualização */
   background-color: rgba(
@@ -60,6 +58,7 @@
   position: relative;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 30px;
 }
 
 .main form > div {
@@ -74,33 +73,56 @@
   align-items: center;
   justify-content: center; /* Centralizar o botão */
 }
+.main form > button {
+  padding: 8px 16px;
+  background-color: #0099ff;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  color: #ffffff;
+}
+.main form > button:hover {
+  opacity: 0.8;
+}
 
-.main table {
+.main section {
   width: 98%;
   margin: 0 auto;
-
+  max-height: 50vh;
+  font-size: 26px;
+  overflow-y: scroll; /* Adiciona uma barra de rolagem horizontal quando necessário */
+  border-collapse: collapse; /* To remove spacing between table cells */
+  margin-bottom: 30px;
+}
+.main section table {
+  width: 98%;
+  margin: 0 auto;
+  font-size: 26px;
   border-collapse: collapse; /* To remove spacing between table cells */
 }
 
 /* Style the table header */
-.main table th {
+.main section table th {
   background-color: #333; /**/
   color: #a2a6c4;
   padding: 8px;
+  position: sticky; /* Deixa o cabeçalho fixo */
+  top: 0; /* Define a posição de fixação na parte superior da tabela */
+  z-index: 1; /* Aumenta a ordem de sobreposição para garantir que o cabeçalho fique na frente do conteúdo rolável */
 }
 
 /* Style the table cells (data) */
-.main table td {
+.main section table td {
   padding: 8px;
   color: #ffffff;
 }
 
 /* Apply alternating background color to table rows for better readability */
-.main table tr:nth-child(even) {
+.main section table tr:nth-child(even) {
   background-color: #f7f7f7;
 }
 
 /* Apply hover effect on table rows */
-.main table tbody tr:hover {
+.main section table tbody tr:hover {
   opacity: 0.8;
 }
