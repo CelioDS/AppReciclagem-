@@ -11,6 +11,7 @@ export default function Home() {
 
   const [caixa, setCaixa] = useState(0);
   const [Entrada, setEntrada] = useState([]);
+  const [isSubmit, setIsSubmit] = useState(false);
   const [saida, setSaida] = useState([]);
   const [arrayDB, setArrayDB] = useState([]);
   const [currentDate, setCurrentDate] = useState(
@@ -85,6 +86,9 @@ export default function Home() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (isSubmit) return; // Impede o envio duplicado enquanto a requisição anterior ainda não foi concluída
+
+    setIsSubmit(true); // Inicia o envio do formulário
 
     const dadosForm = ref.current;
 
@@ -94,6 +98,7 @@ export default function Home() {
       !dadosForm.descricao.value ||
       !dadosForm.valor.value
     ) {
+      setIsSubmit(false); // Reabilita o botão após o envio do formulário
       return toast.warn("Preencha todos os campos!!!");
     } else {
       const dataParts = dadosForm.dataNew.value.split("-");
@@ -114,6 +119,7 @@ export default function Home() {
     dadosForm.valor.value = "";
 
     GetDB();
+    setIsSubmit(false); // Reabilita o botão após o envio do formulário
   }
 
   return (
@@ -177,7 +183,9 @@ export default function Home() {
           className={style.input}
         />
         <div>
-          <button type="submit">SALVAR</button>
+          <button disabled={isSubmit} type="submit">
+            {isSubmit ? "SALVANDO..." : "SALVAR"}
+          </button>
         </div>
       </form>
       <section>
