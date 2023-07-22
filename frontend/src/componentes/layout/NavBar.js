@@ -6,7 +6,7 @@ export default function NavBar() {
   return (
     <main className={style.main}>
       <nav>
-        <h1> logo </h1>
+        <h1>FLUXO DE CAIXA</h1>
         <ul>
           <Link to="/"> materia prima</Link>
           <Link to="/cadastrar">depesa da empresa</Link>

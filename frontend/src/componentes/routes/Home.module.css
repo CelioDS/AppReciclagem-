@@ -65,6 +65,28 @@
   flex-basis: 25%; /* Largura de cada coluna (25% para 4 colunas) */
   padding: 5px; /* Espaçamento entre as colunas */
 }
+.selectInput {
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px;
+  margin: 10px auto;
+  font-size: 26px;
+}
+.main form > div select {
+  width: 100%;
+  height: 37px;
+  display: flex;
+  font-size: 26px;
+}
+.main form > div label {
+  padding-bottom: 5px;
+  color: #000000;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 26px;
+}
 
 /* O último item ocupa 100% da largura da linha para ficar embaixo dos três primeiros */
 .main form > div:last-child {
@@ -74,12 +96,16 @@
   justify-content: center; /* Centralizar o botão */
 }
 .main form > button {
+  display: flex;
   padding: 8px 16px;
   background-color: #0099ff;
   border: none;
   cursor: pointer;
   font-size: 22px;
   color: #ffffff;
+  align-items: center;
+  text-align: center;
+
 }
 .main form > button:hover {
   opacity: 0.8;

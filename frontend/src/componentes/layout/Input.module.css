@@ -16,8 +16,8 @@
 }
 .father > input {
   color: #000000;
-  padding: 8px;
   outline: none;
+  height: 37px;
 }
 .father > input::placeholder {
   color: #9e9b9b;
@@ -26,3 +26,6 @@
   font-size: 26px;
 }
 
+.father > input[type="date"] {
+  font-size: 26px;
+}

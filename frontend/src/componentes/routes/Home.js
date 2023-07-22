@@ -65,7 +65,7 @@ export default function Home() {
     );
     setEntrada(
       arrayDB.reduce((acumulador, data) => {
-        if (data.movimentacao === "entrada") {
+        if (data.movimentacao === "Entrada") {
           return acumulador + data.valor;
         } else {
           return acumulador;
@@ -74,7 +74,7 @@ export default function Home() {
     );
     setSaida(
       arrayDB.reduce((acumulador, data) => {
-        if (data.movimentacao === "saida") {
+        if (data.movimentacao === "Saida") {
           return acumulador + data.valor;
         } else {
           return acumulador;
@@ -150,14 +150,15 @@ export default function Home() {
           value={currentDate} // Usar o estado currentDate como valor do campo de data
           onChange={(e) => setCurrentDate(e.target.value)} // Atualizar o estado currentDate quando o valor do campo mudar
         />
-        <Input
-          text="MOVIMENTAÇÃO"
-          placeholder="Entrada ou Saida"
-          type="text"
-          id="movimentacao"
-          name="movimentacao"
-          className={style.input}
-        />
+        <div className={style.selectInput}>
+          <label>MOVIMENTAÇÂO</label>
+          <select id="movimentacao">
+            <option value="">Selecione</option>
+            <option value="Entrada">Entrada</option>
+            <option value="Saida">Saida</option>
+            <option value="Caixa">Caixa</option>
+          </select>
+        </div>
 
         <Input
           text="DESCRIÇÃO"
@@ -193,9 +194,9 @@ export default function Home() {
               <tr
                 key={id}
                 style={
-                  dado.movimentacao === "entrada"
+                  dado.movimentacao === "Entrada"
                     ? { background: "#008000" }
-                    : dado.movimentacao === "saida"
+                    : dado.movimentacao === "Saida"
                     ? { background: "#800303fb" }
                     : { background: "#0099ff" } // Terceiro valor para outra movimentação
                 }
