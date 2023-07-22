@@ -130,7 +130,7 @@
 }
 .main form > div > button:disabled {
   opacity: 0.2;
-  cursor: pointer;
+  cursor: progress;
 }
 .main form > div > button:not(:disabled):hover {
   /* Estilos para o botão quando não estiver desabilitado e estiver em estado hover */
