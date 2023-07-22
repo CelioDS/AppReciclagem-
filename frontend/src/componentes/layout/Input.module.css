@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 150px;
   max-width: 100%;
   height: auto !important;
   margin: 0 auto;
@@ -11,12 +10,11 @@
 }
 .father > label {
   color: #000000;
-  text-align: start;
+  text-align: center;
   font-weight: bolder;
 }
 .father > input {
   color: #000000;
-  width: 150px;
   padding: 8px;
   outline: none;
 }
@@ -24,4 +22,9 @@
   color: #9e9b9b;
   padding: 18px;
   text-align: center;
+}
+.father > input[type="submit"] {
+  width: 150px;
+  padding: 8px 16px;
+  cursor: pointer;
 }

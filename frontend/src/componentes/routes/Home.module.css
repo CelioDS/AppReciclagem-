@@ -54,11 +54,25 @@
 .main header div:nth-child(3) span h1 {
   color: #0099ff;
 }
+
 .main form {
   display: flex;
   position: relative;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
+}
+
+.main form > div {
+  flex-basis: 25%; /* Largura de cada coluna (25% para 4 colunas) */
+  padding: 5px; /* Espaçamento entre as colunas */
+}
+
+/* O último item ocupa 100% da largura da linha para ficar embaixo dos três primeiros */
+.main form > div:last-child {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centralizar o botão */
 }
 
 .main table {
@@ -87,6 +101,6 @@
 }
 
 /* Apply hover effect on table rows */
-.main table tr:hover {
-  background-color: #e0e0e0;
+.main table tbody tr:hover {
+  opacity: 0.8;
 }

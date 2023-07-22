@@ -8,8 +8,8 @@ export default function NavBar() {
       <nav>
         <h1> logo </h1>
         <ul>
-          <Link to="/">home</Link>
-          <Link to="/cadastrar">cadastro</Link>
+          <Link to="/"> materia prima</Link>
+          <Link to="/cadastrar">depesa da empresa</Link>
         </ul>
       </nav>
     </main>

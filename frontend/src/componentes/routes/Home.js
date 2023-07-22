@@ -3,34 +3,62 @@ import { toast } from "react-toastify";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
+
 import Input from "../layout/Input";
 
 export default function Home() {
   const ref = useRef();
   const [hora, setHora] = useState(new Date());
+
   const [caixa, setCaixa] = useState(0);
   const [Entrada, setEntrada] = useState([]);
   const [saida, setSaida] = useState([]);
   const [arrayDB, setArrayDB] = useState([]);
+  const [currentDate, setCurrentDate] = useState(
+    new Date().toISOString().split("T")[0]
+  ); // Estado para controlar o valor do campo de data
+
+  function filterByCurrentMonth(dataArray) {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1; // Os meses em JavaScript são indexados em zero (janeiro é 0), por isso adicionamos 1 ao mês atual.
+
+    return dataArray.filter((data) => {
+      const dataParts = data.dataNew.split("-");
+      const dataMonth = parseInt(dataParts[1]);
+
+      return dataMonth === currentMonth;
+    });
+  }
 
   async function GetDB() {
     try {
       const res = await axios.get("http://localhost:8800");
-      setArrayDB(res.data);
+      const filteredData = filterByCurrentMonth(res.data.reverse());
+      setArrayDB(filteredData);
     } catch (error) {
       console.error(error);
     }
   }
 
   useEffect(() => {
+    const now = new Date();
+    const hour = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+
+    setHora(`${hour}:${minutes}:${seconds}`); // Atualiza o estado com o horário atual
+  }, []); // O segundo argumento vazio indica que este efeito será executado apenas uma vez na montagem do componente
+
+  useEffect(() => {
     GetDB();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setArrayDB]);
 
   useEffect(() => {
     setCaixa(0);
     setEntrada(
       arrayDB.reduce((acumulador, data) => {
-        if (data.movimentacao === "saida") {
+        if (data.movimentacao === "entrada") {
           return acumulador + data.valor;
         } else {
           return acumulador;
@@ -39,7 +67,7 @@ export default function Home() {
     );
     setSaida(
       arrayDB.reduce((acumulador, data) => {
-        if (data.movimentacao === "entrada") {
+        if (data.movimentacao === "saida") {
           return acumulador + data.valor;
         } else {
           return acumulador;
@@ -50,13 +78,7 @@ export default function Home() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setHora(new Date());
-    const now = new Date();
-    const hour = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-    const seconds = String(now.getSeconds()).padStart(2, "0");
 
-    setHora(`${hour}:${minutes}:${seconds}`);
     const dadosForm = ref.current;
 
     if (
@@ -67,9 +89,11 @@ export default function Home() {
     ) {
       return toast.warn("Preencha todos os campos!!!");
     } else {
+      const dataParts = dadosForm.dataNew.value.split("-");
+      const dataInvertida = dataParts.reverse().join("-");
       await axios
         .post("http://localhost:8800", {
-          dataNew: `${hora} ${dadosForm.dataNew.value}`,
+          dataNew: `${hora} ${dataInvertida}`,
           movimentacao: dadosForm.movimentacao.value,
           descricao: dadosForm.descricao.value,
           valor: dadosForm.valor.value,
@@ -117,6 +141,8 @@ export default function Home() {
           id="dataNew"
           name="dataNew"
           className={style.input}
+          value={currentDate} // Usar o estado currentDate como valor do campo de data
+          onChange={(e) => setCurrentDate(e.target.value)} // Atualizar o estado currentDate quando o valor do campo mudar
         />
         <Input
           text="MOVIMENTAÇÃO"
@@ -143,8 +169,7 @@ export default function Home() {
           name="valor"
           className={style.input}
         />
-
-        <button typeof="submit">Salvar</button>
+        <Input type="submit" className={style.input} />
       </form>
 
       <table>
@@ -157,19 +182,19 @@ export default function Home() {
           </tr>
         </thead>
         <tbody>
-          {arrayDB.map((data, id) => (
+          {arrayDB.map((dado, id) => (
             <tr
               key={id}
               style={
-                data.movimentacao === "entrada"
+                dado.movimentacao === "entrada"
                   ? { background: "#008000" }
                   : { background: "#800303fb" }
               }
             >
-              <td>{data.dataNew}</td>
-              <td>{data.movimentacao}</td>
-              <td>{data.descricao}</td>
-              <td>{data.valor}</td>
+              <td>{dado.dataNew}</td>
+              <td>{dado.movimentacao}</td>
+              <td>{dado.descricao}</td>
+              <td>{dado.valor}</td>
             </tr>
           ))}
         </tbody>

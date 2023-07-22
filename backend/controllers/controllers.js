@@ -12,7 +12,8 @@ export const getDB = (_, res) => {
 };
 
 export const setDB = (req, res) => {
-  const query = "INSERT INTO dados(`dataNew`,`movimentacao`,`descricao`,`valor`) VALUES(?)";
+  const query =
+    "INSERT INTO dados(`dataNew`,`movimentacao`,`descricao`,`valor`) VALUES(?)";
 
   const values = [
     req.body.dataNew,
@@ -24,7 +25,7 @@ export const setDB = (req, res) => {
   db.query(query, [values], (err) => {
     if (err) return res.json(err);
 
-    return res.status(200).json("Usuário criado com sucesso.");
+    return res.status(200).json("Cadastrado com sucesso...");
   });
 };
 
@@ -40,6 +41,6 @@ export const updateDB = (req, res) => {
   db.query(query, [...values, req.params.id], (err) => {
     if (err) return res.json(err);
 
-    return res.status(200).json("cadastro atualizado");
+    return res.status(200).json("Cadastrado  atualizado... ");
   });
 };
