@@ -183,7 +183,7 @@ export default function Home() {
           className={style.input}
         />
         <div>
-          <button disabled={isSubmit} type="submit">
+          <button disabled={isSubmit} type="submit" >
             {isSubmit ? "SALVANDO..." : "SALVAR"}
           </button>
         </div>

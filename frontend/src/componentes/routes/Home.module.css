@@ -126,10 +126,15 @@
   color: #ffffff;
   align-items: center;
   text-align: center;
-
   height: 46px;
 }
-.main form > div > button:hover {
+.main form > div > button:disabled {
+  opacity: 0.2;
+  cursor: pointer;
+}
+.main form > div > button:not(:disabled):hover {
+  /* Estilos para o botão quando não estiver desabilitado e estiver em estado hover */
+
   opacity: 0.8;
   outline: none;
   border-color: #007bff;
