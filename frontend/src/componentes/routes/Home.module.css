@@ -88,8 +88,8 @@
   text-align: center;
 }
 
-.main form > div .selectInput select option[value=""] {
-  color: #aaa;
+.main form > .selectInput option[value=""] {
+  color: #aaa !important;
 }
 
 /* Estilo para a borda do campo de seleção quando em foco */
@@ -126,11 +126,14 @@
   color: #ffffff;
   align-items: center;
   text-align: center;
-  width: 106px;
+
   height: 46px;
 }
-.main form > button:hover {
+.main form > div > button:hover {
   opacity: 0.8;
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px #007bff;
 }
 
 .main section {
