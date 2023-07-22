@@ -32,7 +32,18 @@
   width: 350px;
 }
 .main header div span h1 {
-  background: #000000;
+  backdrop-filter: blur(8px); /* Desfoque para criar o efeito de vidro */
+
+  border-radius: 10px;
+
+  text-align: center;
+  color: white; /* Cor do texto para melhor visualização */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Cor do fundo com transparência */
 }
 .main header div:nth-child(1) span h1 {
   color: rgb(0, 255, 0);
