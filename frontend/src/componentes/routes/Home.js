@@ -35,7 +35,7 @@ export default function Home() {
       const filteredData = filterByCurrentMonth(res.data.reverse());
       setArrayDB(filteredData);
     } catch (error) {
-      console.error(error);
+      toast.error(error);
     }
   }
 
