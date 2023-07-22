@@ -1,10 +1,13 @@
 import style from "./Home.module.css";
-
-import Input from "../layout/Input";
-import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
+import Input from "../layout/Input";
+
 export default function Home() {
+  const ref = useRef();
+  const [hora, setHora] = useState(new Date());
   const [caixa, setCaixa] = useState(0);
   const [Entrada, setEntrada] = useState([]);
   const [saida, setSaida] = useState([]);
@@ -24,10 +27,10 @@ export default function Home() {
   }, [setArrayDB]);
 
   useEffect(() => {
-    setCaixa(1);
+    setCaixa(0);
     setEntrada(
       arrayDB.reduce((acumulador, data) => {
-        if (data.movimentacao === "saida" ) {
+        if (data.movimentacao === "saida") {
           return acumulador + data.valor;
         } else {
           return acumulador;
@@ -44,6 +47,43 @@ export default function Home() {
       }, 0)
     );
   }, [arrayDB]);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setHora(new Date());
+    const now = new Date();
+    const hour = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+
+    setHora(`${hour}:${minutes}:${seconds}`);
+    const dadosForm = ref.current;
+
+    if (
+      !dadosForm.dataNew.value ||
+      !dadosForm.movimentacao.value ||
+      !dadosForm.descricao.value ||
+      !dadosForm.valor.value
+    ) {
+      return toast.warn("Preencha todos os campos!!!");
+    } else {
+      await axios
+        .post("http://localhost:8800", {
+          dataNew: `${hora} ${dadosForm.dataNew.value}`,
+          movimentacao: dadosForm.movimentacao.value,
+          descricao: dadosForm.descricao.value,
+          valor: dadosForm.valor.value,
+        })
+        .then(({ data }) => toast.success(data))
+        .catch(({ data }) => toast.error(data));
+    }
+    dadosForm.dataNew.value = "";
+    dadosForm.movimentacao.value = "";
+    dadosForm.descricao.value = "";
+    dadosForm.valor.value = "";
+
+    GetDB();
+  }
 
   return (
     <main className={style.main}>
@@ -69,49 +109,42 @@ export default function Home() {
         </div>
       </header>
 
-      <form>
+      <form ref={ref} onSubmit={handleSubmit}>
         <Input
           text="DATA"
           placeholder="data"
           type="date"
-          id="data"
-          name="data"
+          id="dataNew"
+          name="dataNew"
           className={style.input}
         />
         <Input
           text="MOVIMENTAÇÃO"
           placeholder="Entrada ou Saida"
           type="text"
-          id="Movimentação"
-          name="Movimentação"
+          id="movimentacao"
+          name="movimentacao"
           className={style.input}
         />
 
         <Input
           text="DESCRIÇÃO"
           placeholder="Descrição"
-          type="select"
-          id="Descrição"
-          name="Descrição"
+          type="text"
+          id="descricao"
+          name="descricao"
           className={style.input}
         />
         <Input
           text="VALOR"
           placeholder="valor"
           type="number"
-          id="Valor"
-          name="Valor"
+          id="valor"
+          name="valor"
           className={style.input}
         />
 
-        <Input
-          text="Salvar"
-          placeholder="Salvar"
-          type="submit"
-          id="Salvar"
-          name="Salvar"
-          className={style.input}
-        />
+        <button typeof="submit">Salvar</button>
       </form>
 
       <table>
@@ -128,12 +161,12 @@ export default function Home() {
             <tr
               key={id}
               style={
-                data.movimentacao === "saida"
+                data.movimentacao === "entrada"
                   ? { background: "#008000" }
                   : { background: "#800303fb" }
               }
             >
-              <td>{data.data}</td>
+              <td>{data.dataNew}</td>
               <td>{data.movimentacao}</td>
               <td>{data.descricao}</td>
               <td>{data.valor}</td>

@@ -1,10 +1,11 @@
 import express from "express";
 
-import { getDB } from "../controllers/controllers.js";
+import { getDB, setDB } from "../controllers/controllers.js";
 
 const router = express.Router();
 
 router.get("/", getDB);
 
+router.post("/", setDB);
 
-export default router
+export default router;
