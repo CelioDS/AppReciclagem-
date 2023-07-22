@@ -1,7 +1,7 @@
 import { db } from "../db.js";
 
 export const getDB = (_, res) => {
-  const query = "SELECT * FROM sucatas";
+  const query = "SELECT * FROM dados";
 
   db.query(query, (err, data) => {
     if (err) {
@@ -13,7 +13,7 @@ export const getDB = (_, res) => {
 
 export const setDB = (req, res) => {
   const query =
-    "INSERT INTO sucatas(`dataNew`,`movimentacao`,`descricao`,`valor`) VALUES(?)";
+    "INSERT INTO dados(`dataNew`,`movimentacao`,`descricao`,`valor`) VALUES(?)";
 
   const values = [
     req.body.dataNew,
@@ -31,7 +31,7 @@ export const setDB = (req, res) => {
 
 export const updateDB = (req, res) => {
   const query =
-    "UPDATE sucatas SET `dataNew` = ?, `movimentacao` = ?, `descricao` = ?, `valor` = ?,";
+    "UPDATE dados SET `dataNew` = ?, `movimentacao` = ?, `descricao` = ?, `valor` = ?,";
   const values = [
     req.body.dataNew,
     req.body.movimentacao,
