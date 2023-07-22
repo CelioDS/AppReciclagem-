@@ -19,12 +19,13 @@
   border-bottom: 1px solid #ccc;
   margin-bottom: 30px;
 }
-.main header h1 {
+.main header div {
   align-items: center;
   border: 1px solid #ccc;
   padding: 8px 16px;
   color: #ffffff;
   background-color: #000000;
+  border-radius: 8px;
 }
 
 .main header div {
@@ -47,4 +48,34 @@
   position: relative;
   flex-direction: row;
   justify-content: center;
+}
+
+.main table {
+  width: 98%;
+  margin: 0 auto;
+
+  border-collapse: collapse; /* To remove spacing between table cells */
+}
+
+/* Style the table header */
+.main table th {
+  background-color: #333; /**/
+  color: #a2a6c4;
+  padding: 8px;
+}
+
+/* Style the table cells (data) */
+.main table td {
+  padding: 8px;
+  color: #ffffff;
+}
+
+/* Apply alternating background color to table rows for better readability */
+.main table tr:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+/* Apply hover effect on table rows */
+.main table tr:hover {
+  background-color: #e0e0e0;
 }
