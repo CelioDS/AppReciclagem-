@@ -1,3 +1,9 @@
+:root {
+  --corSaida: #ff0000;
+  --corEntrada: #00ff00;
+  --corCaixa: #0099ff;
+}
+
 .main {
   min-height: calc(100vh - 135px);
   text-align: center;
@@ -44,13 +50,13 @@
   ); /* Cor do fundo com transparência */
 }
 .main header div:nth-child(1) span h1 {
-  color: rgb(0, 255, 0);
+  color: var(--corEntrada);
 }
 .main header div:nth-child(2) span h1 {
-  color: red;
+  color: var(--corSaida);
 }
 .main header div:nth-child(3) span h1 {
-  color: #0099ff;
+  color: var(--corCaixa);
 }
 
 .main form {
@@ -75,11 +81,24 @@
   font-size: 26px;
 }
 .main form > div select {
-  width: 100%;
   height: 37px;
   display: flex;
   font-size: 26px;
+  text-align: center;
 }
+
+.main form > div .selectInput select option[value=""] {
+  color: #aaa;
+}
+
+/* Estilo para a borda do campo de seleção quando em foco */
+.main form > div select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px #007bff;
+}
+/**/
+
 .main form > div label {
   padding-bottom: 5px;
   color: #000000;
@@ -98,14 +117,15 @@
 .main form > button {
   display: flex;
   padding: 8px 16px;
-  background-color: #0099ff;
+  background-color: var(--corCaixa);
   border: none;
   cursor: pointer;
   font-size: 22px;
   color: #ffffff;
   align-items: center;
   text-align: center;
-
+  width: 106px;
+  height: 46px;
 }
 .main form > button:hover {
   opacity: 0.8;

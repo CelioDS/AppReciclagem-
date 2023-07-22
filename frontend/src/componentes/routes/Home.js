@@ -122,13 +122,13 @@ export default function Home() {
         <div>
           <h1>ENTRADA</h1>
           <span>
-            <h1> R$ + {Entrada}</h1>
+            <h1>R$ {Entrada}</h1>
           </span>
         </div>
         <div>
           <h1>SAÍDA</h1>
           <span>
-            <h1>R$ - {saida}</h1>
+            <h1>R$ {saida}</h1>
           </span>
         </div>
         <div>
@@ -160,6 +160,7 @@ export default function Home() {
           </select>
         </div>
 
+
         <Input
           text="DESCRIÇÃO"
           placeholder="Descrição"
@@ -170,7 +171,7 @@ export default function Home() {
         />
         <Input
           text="VALOR"
-          placeholder="valor"
+          placeholder="Valor"
           type="number"
           id="valor"
           name="valor"
