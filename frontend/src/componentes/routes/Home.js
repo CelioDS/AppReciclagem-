@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-
 import Input from "../layout/Input";
 
 export default function Home() {
@@ -32,7 +31,7 @@ export default function Home() {
 
   async function GetDB() {
     try {
-      const res = await axios.get("http://localhost:8800");
+      const res = await axios.get(process.env.REACT_APP_DB_API);
       const filteredData = filterByCurrentMonth(res.data.reverse());
       setArrayDB(filteredData);
     } catch (error) {
@@ -51,7 +50,7 @@ export default function Home() {
 
   useEffect(() => {
     GetDB();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setArrayDB]);
 
   useEffect(() => {
@@ -92,7 +91,7 @@ export default function Home() {
       const dataParts = dadosForm.dataNew.value.split("-");
       const dataInvertida = dataParts.reverse().join("-");
       await axios
-        .post("http://localhost:8800", {
+        .post(process.env.REACT_APP_DB_API, {
           dataNew: `${hora} ${dataInvertida}`,
           movimentacao: dadosForm.movimentacao.value,
           descricao: dadosForm.descricao.value,
