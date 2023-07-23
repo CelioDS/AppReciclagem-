@@ -27,7 +27,9 @@
 }
 
 .form > .selectInput option[value=""] {
-  color: #aaa !important;
+  color: #ebebeb; /* Cor diferente para o primeiro option */
+  font-style: italic; /* Exemplo: Adicionar estilo itálico */
+  background-color: #ebebeb; /* Cor de fundo quando um item é selecionado */
 }
 
 /* Estilo para a borda do campo de seleção quando em foco */
@@ -40,10 +42,15 @@
 
 .form > div label {
   padding-bottom: 5px;
-  color: #000000;
+  color: var(--GreyDark);
   text-align: center;
   font-weight: bolder;
   font-size: 26px;
+}
+.form > div input,
+.form > div select {
+  border: 1px solid #c4c4c4 !important;
+  color: #3b3939;
 }
 
 /* O último item ocupa 100% da largura da linha para ficar embaixo dos três primeiros */
@@ -57,6 +64,7 @@
 .form > div > button {
   display: flex;
   padding: 8px 16px;
+
   background-color: var(--corCaixa);
   border: none;
   cursor: pointer;
@@ -65,16 +73,15 @@
   align-items: center;
   text-align: center;
   height: 46px;
+  font-weight: bolder;
 }
 .form > div > button:disabled {
   opacity: 0.2;
+  background-color: var(--corEntrada);
   cursor: progress;
 }
 .form > div > button:not(:disabled):hover {
-  /* Estilos para o botão quando não estiver desabilitado e estiver em estado hover */
-
   opacity: 0.8;
   outline: none;
   border-color: #007bff;
-  box-shadow: 0 0 5px #007bff;
 }

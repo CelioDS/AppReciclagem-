@@ -1,3 +1,14 @@
+:root {
+  --corSaida: #800303fb;
+  --corEntrada: #008000;
+  --corCaixa: #0099ff;
+  --GreyLight: #a2a6c4;
+  --GreyNormal: #a2a6c4;
+  --GreyDark: #727272;
+  --GreyCCC: #ccc;
+  --corShadow: #2c2b2b;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -6,12 +17,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: system-ui, sans-serif;
-}
+
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +25,7 @@ body {
   font-family: system-ui, sans-serif;
 }
 body {
-  background-color: #f8f7f7;
+  background-color: #fdfdfd;
 }
 
 *::first-letter {
@@ -31,10 +37,10 @@ p::first-letter {
 
 p {
   font-size: 15px;
-  font-size: clamp(14px, 5vw, 16px);
+  font-size: clamp(14px, 5vw, 16px) !important;
 }
 
 h1 {
   font-size: 25px;
-  font-size: clamp(20px, 5vw, 30px);
+  font-size: clamp(20px, 5vw, 30px) !important;
 }

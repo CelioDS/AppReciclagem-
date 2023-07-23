@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <Outlet></Outlet>
+      <Outlet/>
       <ToastContainer
         pauseOnHover={false}
         autoClose={3000}

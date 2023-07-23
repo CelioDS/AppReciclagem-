@@ -8,6 +8,7 @@ import Error from "./componentes/layout/Error";
 import Cadastrar from "./componentes/routes/Cadastrar";
 import Home from './componentes/routes/Home'
 
+
 //1- configurando router
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 

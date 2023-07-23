@@ -8,7 +8,7 @@ export default function NavBar() {
       <nav>
         <h1>FLUXO DE CAIXA</h1>
         <ul>
-          <Link to="/"> materia prima</Link>
+          <Link to="/"> Inicio</Link>
           <Link to="/cadastrar">depesa da empresa</Link>
         </ul>
       </nav>

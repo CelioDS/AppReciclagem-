@@ -1,5 +1,5 @@
 .main {
-  background-color: #1f1e1d;
+  background-color: #407c9e;
   height: 60px;
   width: 100%;
   display: flex;
@@ -7,7 +7,6 @@
   justify-content: space-around;
   align-items: center; /* Adicionado para centralizar verticalmente */
   text-align: center;
-  color: #fff;
 }
 .main nav {
   width: 100%;
@@ -16,7 +15,7 @@
   justify-content: space-around;
   align-items: center; /* Adicionado para centralizar verticalmente */
   text-align: center;
-  color: #fff;
+  color: #ffffff;
 }
 .main nav ul {
   display: flex;

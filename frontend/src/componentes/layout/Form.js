@@ -9,7 +9,6 @@ import Input from "../layout/Input";
 import style from "./Form.module.css";
 
 export default function Form({ GetDB }) {
-
   const [isSubmit, setIsSubmit] = useState(false);
   const ref = useRef();
   const [hora, setHora] = useState(new Date());
