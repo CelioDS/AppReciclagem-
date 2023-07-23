@@ -16,31 +16,33 @@
   padding: 30px 0;
   border-bottom: 1px solid #ccc;
   margin-bottom: 30px;
+  gap: 10px;
 }
 .header div {
   align-items: center;
-  border: 1px solid #ccc;
   padding: 8px 16px;
-  color: #ffffff;
-  background-color: #000000;
+  color: #272727;
+  background-color: #ffffff;
   border-radius: 8px;
+  filter: drop-shadow(3px 3px 3px #ccc);
+
+}
+.header div:nth-child(1) {
+  border-top: 5px solid var(--corEntrada);
+
+}
+.header  div:nth-child(2)  {
+  border-top: 5px solid var(--corSaida);
+  
+}
+.header  div:nth-child(3)  {
+  border-top: 5px solid var(--corCaixa);
 }
 
 .header div {
   width: 350px;
 }
-.header div span h1 {
-  backdrop-filter: blur(8px); /* Desfoque para criar o efeito de vidro */
-  border-radius: 10px;
-  text-align: center;
-  color: white; /* Cor do texto para melhor visualização */
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-  ); /* Cor do fundo com transparência */
-}
+
 .header div:nth-child(1) span h1 {
   color: var(--corEntrada);
 }
