@@ -4,15 +4,7 @@
   --corCaixa: #0099ff;
 }
 
-.main {
-  min-height: calc(100vh - 135px);
-  text-align: center;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-}
-
-.main header {
+.header {
   display: flex;
   width: 100%;
   height: 150px;
@@ -25,7 +17,7 @@
   border-bottom: 1px solid #ccc;
   margin-bottom: 30px;
 }
-.main header div {
+.header div {
   align-items: center;
   border: 1px solid #ccc;
   padding: 8px 16px;
@@ -34,10 +26,10 @@
   border-radius: 8px;
 }
 
-.main header div {
+.header div {
   width: 350px;
 }
-.main header div span h1 {
+.header div span h1 {
   backdrop-filter: blur(8px); /* Desfoque para criar o efeito de vidro */
   border-radius: 10px;
   text-align: center;
@@ -49,16 +41,12 @@
     0.2
   ); /* Cor do fundo com transparência */
 }
-.main header div:nth-child(1) span h1 {
+.header div:nth-child(1) span h1 {
   color: var(--corEntrada);
 }
-.main header div:nth-child(2) span h1 {
+.header div:nth-child(2) span h1 {
   color: var(--corSaida);
 }
-.main header div:nth-child(3) span h1 {
+.header div:nth-child(3) span h1 {
   color: var(--corCaixa);
 }
-
-
-
-

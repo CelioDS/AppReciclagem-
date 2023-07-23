@@ -1,0 +1,80 @@
+.form {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.form > div {
+  flex-basis: 25%; /* Largura de cada coluna (25% para 4 colunas) */
+  padding: 5px; /* Espaçamento entre as colunas */
+  min-width: 215px;
+}
+.selectInput {
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px;
+  margin: 10px auto;
+  font-size: 26px;
+}
+.form > div select {
+  height: 37px;
+  display: flex;
+  font-size: 26px;
+  text-align: center;
+}
+
+.form > .selectInput option[value=""] {
+  color: #aaa !important;
+}
+
+/* Estilo para a borda do campo de seleção quando em foco */
+.form > div select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px #007bff;
+}
+/**/
+
+.form > div label {
+  padding-bottom: 5px;
+  color: #000000;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 26px;
+}
+
+/* O último item ocupa 100% da largura da linha para ficar embaixo dos três primeiros */
+.form > div:last-child {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+
+  justify-content: center; /* Centralizar o botão */
+}
+.form > div > button {
+  display: flex;
+  padding: 8px 16px;
+  background-color: var(--corCaixa);
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  color: #ffffff;
+  align-items: center;
+  text-align: center;
+  height: 46px;
+}
+.form > div > button:disabled {
+  opacity: 0.2;
+  cursor: progress;
+}
+.form > div > button:not(:disabled):hover {
+  /* Estilos para o botão quando não estiver desabilitado e estiver em estado hover */
+
+  opacity: 0.8;
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px #007bff;
+}

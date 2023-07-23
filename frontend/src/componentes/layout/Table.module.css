@@ -1,0 +1,42 @@
+
+section {
+  width: 98%;
+  margin: 0 auto;
+  max-height: 50vh;
+  font-size: 26px;
+  overflow-y: scroll; /* Adiciona uma barra de rolagem horizontal quando necessário */
+  border-collapse: collapse; /* To remove spacing between table cells */
+  margin-bottom: 30px;
+}
+section table {
+  width: 98%;
+  margin: 0 auto;
+  font-size: 26px;
+  border-collapse: collapse; /* To remove spacing between table cells */
+}
+
+/* Style the table header */
+section table th {
+  background-color: #333; /**/
+  color: #a2a6c4;
+  padding: 8px;
+  position: sticky; /* Deixa o cabeçalho fixo */
+  top: 0; /* Define a posição de fixação na parte superior da tabela */
+  z-index: 1; /* Aumenta a ordem de sobreposição para garantir que o cabeçalho fique na frente do conteúdo rolável */
+}
+
+/* Style the table cells (data) */
+section table td {
+  padding: 8px;
+  color: #ffffff;
+}
+
+/* Apply alternating background color to table rows for better readability */
+section table tr:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+/* Apply hover effect on table rows */
+section table tbody tr:hover {
+  opacity: 0.8;
+}
