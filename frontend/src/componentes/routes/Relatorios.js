@@ -92,7 +92,7 @@ export default function Relatorios() {
     );
     setPlastico(
       arrayDB.reduce((acumulador, data) => {
-        if (data.descricao === "ferro" && data.movimentacao === "Entrada") {
+        if (data.descricao === "plastico" && data.movimentacao === "Entrada") {
           return data.quantidade + acumulador;
         } else {
           return acumulador;
