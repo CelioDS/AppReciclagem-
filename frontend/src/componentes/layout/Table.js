@@ -17,58 +17,68 @@ export default function Table({ arrayDB }) {
             {!isMobile && <th>data </th>}
             <th>movimentação</th>
             <th>descrição</th>
+            <th>quantidade(KG)</th>
             <th>valor</th>
+            <th>preço por KG</th>
           </tr>
         </thead>
         <tbody>
           {arrayDB.length === 0 ? (
             <tr>
-              <td colSpan={5}>
+              <td colSpan={7}>
                 <Loading></Loading>
               </td>
             </tr>
           ) : (
-            arrayDB.map((dado, id) => (
-              <tr key={id}>
-                {!isMobile && (
+            arrayDB.map(
+              ({ id, dataNew, descricao, quantidade, movimentacao, valor }) => (
+                <tr key={id}>
+                  {!isMobile && (
+                    <td
+                      style={
+                        movimentacao === "Entrada"
+                          ? { color: "#008000" }
+                          : movimentacao === "Saida"
+                          ? { color: "#800303fb" }
+                          : { color: "#0099ff" } // Terceiro valor para outra movimentação
+                      }
+                    >
+                      {id + 1}
+                    </td>
+                  )}
+                  {!isMobile && <td>{dataNew}</td>}
                   <td
                     style={
-                      dado.movimentacao === "Entrada"
+                      movimentacao === "Entrada"
                         ? { color: "#008000" }
-                        : dado.movimentacao === "Saida"
+                        : movimentacao === "Saida"
                         ? { color: "#800303fb" }
                         : { color: "#0099ff" } // Terceiro valor para outra movimentação
                     }
                   >
-                    {id + 1}
+                    {movimentacao}
                   </td>
-                )}
-                {!isMobile && <td>{dado.dataNew}</td>}
-                <td
-                  style={
-                    dado.movimentacao === "Entrada"
-                      ? { color: "#008000" }
-                      : dado.movimentacao === "Saida"
-                      ? { color: "#800303fb" }
-                      : { color: "#0099ff" } // Terceiro valor para outra movimentação
-                  }
-                >
-                  {dado.movimentacao}
-                </td>
-                <td>{dado.descricao}</td>
-                <td
-                  style={
-                    dado.movimentacao === "Entrada"
-                      ? { color: "#008000", background: "#d9f0cf" }
-                      : dado.movimentacao === "Saida"
-                      ? { color: "#800303fb", background: "#FFC0CB" }
-                      : { color: "#0099ff", background: "#87CEEB" } // Terceiro valor para outra movimentação
-                  }
-                >
-                  {dado.valor}
-                </td>
-              </tr>
-            ))
+                  <td>{descricao}</td>
+                  <td>{quantidade}</td>
+                  <td
+                    style={
+                      movimentacao === "Entrada"
+                        ? { color: "#008000", background: "#d9f0cf" }
+                        : movimentacao === "Saida"
+                        ? { color: "#800303fb", background: "#FFC0CB" }
+                        : { color: "#0099ff", background: "#87CEEB" } // Terceiro valor para outra movimentação
+                    }
+                  >
+                    {valor}
+                  </td>
+                  <td>
+                    {movimentacao !== "Caixa"
+                      ? parseFloat(valor / quantidade).toFixed(2)
+                      : "-"}
+                  </td>
+                </tr>
+              )
+            )
           )}
         </tbody>
       </table>

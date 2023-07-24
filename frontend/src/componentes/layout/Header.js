@@ -1,6 +1,6 @@
 import style from "./Header.module.css";
 
-export default function Header({entrada, saida, caixa}) {
+export default function Header({ entrada, saida, caixa, ferro, papelao }) {
   return (
     <header className={style.header}>
       <div>
@@ -19,6 +19,18 @@ export default function Header({entrada, saida, caixa}) {
         <h1>CAIXA</h1>
         <span>
           <h1>R$ {caixa + entrada - saida}</h1>
+        </span>
+      </div>
+      <div>
+        <h1>ferro</h1>
+        <span>
+          <h1> {ferro}KG</h1>
+        </span>
+      </div>
+      <div>
+        <h1>papelao</h1>
+        <span>
+          <h1> {papelao}KG</h1>
         </span>
       </div>
     </header>

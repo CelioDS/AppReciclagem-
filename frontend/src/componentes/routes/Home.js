@@ -8,10 +8,13 @@ import Header from "../layout/Header";
 import Table from "../layout/Table";
 
 export default function Home() {
-  const [caixa, setCaixa] = useState(0);
+  const [caixa, setCaixa] = useState([]);
   const [entrada, setEntrada] = useState([]);
   const [saida, setSaida] = useState([]);
   const [arrayDB, setArrayDB] = useState([]);
+
+  const [ferro, setFerro] = useState([]);
+  const [papelao, setPapelao] = useState([]);
 
   function filterByCurrentMonth(dataArray) {
     const currentDate = new Date();
@@ -68,11 +71,37 @@ export default function Home() {
         }
       }, 0)
     );
+
+    /* MATERIAIS */
+    setPapelao(
+      arrayDB.reduce((acumulador, data) => {
+        if (data.descricao === "papelao" && data.movimentacao === "Entrada") {
+          return acumulador + data.quantidade;
+        } else {
+          return acumulador;
+        }
+      }, 0)
+    );
+    setFerro(
+      arrayDB.reduce((acumulador, data) => {
+        if (data.descricao === "ferro" && data.movimentacao === "Entrada") {
+          return data.quantidade + acumulador;
+        } else {
+          return acumulador;
+        }
+      }, 0)
+    );
   }, [arrayDB]);
 
   return (
     <main className={style.main}>
-      <Header entrada={entrada} saida={saida} caixa={caixa} />
+      <Header
+        entrada={entrada}
+        saida={saida}
+        caixa={caixa}
+        papelao={papelao}
+        ferro={ferro}
+      />
       <Form GetDB={GetDB} />
       <Table arrayDB={arrayDB} />
     </main>

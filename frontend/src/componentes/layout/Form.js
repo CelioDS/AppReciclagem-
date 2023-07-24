@@ -10,6 +10,7 @@ import style from "./Form.module.css";
 
 export default function Form({ GetDB }) {
   const [isSubmit, setIsSubmit] = useState(false);
+  const [typeMovimentação, setTypeMovimentação] = useState();
   const ref = useRef();
   const [hora, setHora] = useState(new Date());
   const [currentDate, setCurrentDate] = useState(
@@ -63,6 +64,15 @@ export default function Form({ GetDB }) {
       e.target.value = ""; // Limpa o valor do input se não for um número de ponto flutuante válido ou se for negativo
     }
   }
+  function handleValida(e) {
+    const dadosForm = ref.current;
+    const inputValue = e.target.value;
+    setTypeMovimentação(inputValue);
+
+    if (inputValue === "Caixa") {
+      dadosForm.quantidade.value = 0;
+    }
+  }
 
   useEffect(() => {
     const now = new Date();
@@ -86,9 +96,10 @@ export default function Form({ GetDB }) {
           onChange={(e) => setCurrentDate(e.target.value)} // Atualizar o estado currentDate quando o valor do campo mudar
         />
       </div>
-      <div className={style.selectInput}>
+
+      <div className={style.selectInput} onChange={handleValida}>
         <label>MOVIMENTAÇÂO</label>
-        <select id="movimentacao">
+        <select id="movimentacao" onChange={handleValida}>
           <option value="">Selecione</option>
           <option value="Entrada">Entrada</option>
           <option value="Saida">Saida</option>
@@ -96,14 +107,27 @@ export default function Form({ GetDB }) {
         </select>
       </div>
 
-      <Input
-        text="DESCRIÇÃO"
-        placeholder="Digite a Descrição aqui"
-        type="text"
-        id="descricao"
-        name="descricao"
-        className={style.input}
-      />
+      {typeMovimentação === "Caixa" ? (
+        <Input
+          text="DESCRIÇÃO"
+          placeholder="Digite a Descrição aqui"
+          type="text"
+          id="descricao"
+          name="descricao"
+          className={style.input}
+        />
+      ) : (
+        <div className={style.selectInput}>
+          <label>MOVIMENTAÇÂO</label>
+          <select id="descricao" onChange={handleValida}>
+            <option value="">Selecione</option>
+            <option value="ferro">ferro</option>
+            <option value="papelao">papelao</option>
+            <option value="plastico">plastico</option>
+          </select>
+        </div>
+      )}
+
       <Input
         text="Quantidade(KG)"
         placeholder="Digite o peso KG"
