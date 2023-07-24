@@ -13,9 +13,6 @@ export default function Home() {
   const [saida, setSaida] = useState([]);
   const [arrayDB, setArrayDB] = useState([]);
 
-  const [ferro, setFerro] = useState([]);
-  const [papelao, setPapelao] = useState([]);
-
   function filterByCurrentMonth(dataArray) {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth() + 1; // Os meses em JavaScript são indexados em zero (janeiro é 0), por isso adicionamos 1 ao mês atual.
@@ -71,37 +68,11 @@ export default function Home() {
         }
       }, 0)
     );
-
-    /* MATERIAIS */
-    setPapelao(
-      arrayDB.reduce((acumulador, data) => {
-        if (data.descricao === "papelao" && data.movimentacao === "Entrada") {
-          return acumulador + data.quantidade;
-        } else {
-          return acumulador;
-        }
-      }, 0)
-    );
-    setFerro(
-      arrayDB.reduce((acumulador, data) => {
-        if (data.descricao === "ferro" && data.movimentacao === "Entrada") {
-          return data.quantidade + acumulador;
-        } else {
-          return acumulador;
-        }
-      }, 0)
-    );
   }, [arrayDB]);
 
   return (
     <main className={style.main}>
-      <Header
-        entrada={entrada}
-        saida={saida}
-        caixa={caixa}
-        papelao={papelao}
-        ferro={ferro}
-      />
+      <Header entrada={entrada} saida={saida} caixa={caixa} />
       <Form GetDB={GetDB} />
       <Table arrayDB={arrayDB} />
     </main>

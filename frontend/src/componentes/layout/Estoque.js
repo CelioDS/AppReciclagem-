@@ -1,6 +1,6 @@
 import style from "./Estoque.module.css";
 
-export default function Estoque({ ferro, papelao }) {
+export default function Estoque({ ferro, papelao, plastico }) {
   return (
     <header className={style.header}>
       <div>
@@ -13,6 +13,12 @@ export default function Estoque({ ferro, papelao }) {
         <h1>papelao</h1>
         <span>
           <h1> {papelao}KG</h1>
+        </span>
+      </div>
+      <div>
+        <h1>plastico</h1>
+        <span>
+          <h1> {plastico}KG</h1>
         </span>
       </div>
     </header>

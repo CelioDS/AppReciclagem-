@@ -13,6 +13,7 @@ export default function Relatorios() {
 
   const [ferro, setFerro] = useState([]);
   const [papelao, setPapelao] = useState([]);
+  const [plastico, setPlastico] = useState([]);
 
   function filterByCurrentMonth(dataArray) {
     const currentDate = new Date();
@@ -89,13 +90,22 @@ export default function Relatorios() {
         }
       }, 0)
     );
+    setPlastico(
+      arrayDB.reduce((acumulador, data) => {
+        if (data.descricao === "ferro" && data.movimentacao === "Entrada") {
+          return data.quantidade + acumulador;
+        } else {
+          return acumulador;
+        }
+      }, 0)
+    );
   }, [arrayDB]);
 
   return (
     <main className={style.main}>
       <h1>Relatorios</h1>
       <br />
-      <Estoque papelao={papelao} ferro={ferro} />
+      <Estoque papelao={papelao} ferro={ferro} plastico={plastico} />
       <Header entrada={entrada} saida={saida} caixa={caixa} />
     </main>
   );
