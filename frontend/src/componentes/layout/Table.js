@@ -2,9 +2,12 @@ import style from "./Table.module.css";
 import Mobile from "../function/CheckMobile";
 import { useCallback } from "react";
 
+import Loading from "./Loading";
+
 export default function Table({ arrayDB }) {
   const checkMobile = useCallback(Mobile, []);
   const isMobile = checkMobile();
+
   return (
     <section>
       <table className={style.table}>
@@ -18,9 +21,29 @@ export default function Table({ arrayDB }) {
           </tr>
         </thead>
         <tbody>
-          {arrayDB.map((dado, id) => (
-            <tr key={id}>
-              {!isMobile && (
+          {arrayDB.length === 0 ? (
+            <tr>
+              <td colSpan={5}>
+                <Loading></Loading>
+              </td>
+            </tr>
+          ) : (
+            arrayDB.map((dado, id) => (
+              <tr key={id}>
+                {!isMobile && (
+                  <td
+                    style={
+                      dado.movimentacao === "Entrada"
+                        ? { color: "#008000" }
+                        : dado.movimentacao === "Saida"
+                        ? { color: "#800303fb" }
+                        : { color: "#0099ff" } // Terceiro valor para outra movimentação
+                    }
+                  >
+                    {id + 1}
+                  </td>
+                )}
+                {!isMobile && <td>{dado.dataNew}</td>}
                 <td
                   style={
                     dado.movimentacao === "Entrada"
@@ -30,35 +53,23 @@ export default function Table({ arrayDB }) {
                       : { color: "#0099ff" } // Terceiro valor para outra movimentação
                   }
                 >
-                  {id + 1}
+                  {dado.movimentacao}
                 </td>
-              )}
-              {!isMobile && <td>{dado.dataNew}</td>}
-              <td
-                style={
-                  dado.movimentacao === "Entrada"
-                    ? { color: "#008000" }
-                    : dado.movimentacao === "Saida"
-                    ? { color: "#800303fb" }
-                    : { color: "#0099ff" } // Terceiro valor para outra movimentação
-                }
-              >
-                {dado.movimentacao}
-              </td>
-              <td>{dado.descricao}</td>
-              <td
-                style={
-                  dado.movimentacao === "Entrada"
-                    ? { color: "#008000", background: "#d9f0cf" }
-                    : dado.movimentacao === "Saida"
-                    ? { color: "#800303fb", background: "#FFC0CB" }
-                    : { color: "#0099ff", background: "#87CEEB" } // Terceiro valor para outra movimentação
-                }
-              >
-                {dado.valor}
-              </td>
-            </tr>
-          ))}
+                <td>{dado.descricao}</td>
+                <td
+                  style={
+                    dado.movimentacao === "Entrada"
+                      ? { color: "#008000", background: "#d9f0cf" }
+                      : dado.movimentacao === "Saida"
+                      ? { color: "#800303fb", background: "#FFC0CB" }
+                      : { color: "#0099ff", background: "#87CEEB" } // Terceiro valor para outra movimentação
+                  }
+                >
+                  {dado.valor}
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </section>

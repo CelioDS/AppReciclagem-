@@ -6,8 +6,6 @@ export default function FontSize() {
     parseFloat(localStorage.getItem("FontSize")) || 1
   );
 
-  const [IsVisible, setIsVisible] = useState(true);
-
   useEffect(() => {
     localStorage.setItem("FontSize", fontSize.toString());
   }, [fontSize]);
@@ -25,12 +23,6 @@ export default function FontSize() {
     }
   }
 
-  useState(() => {
-    setTimeout(() => {
-      setIsVisible(false);
-    }, 1000);
-  });
-
   const div = {
     fontSize: "16px",
     borderRadius: "4px",
@@ -39,16 +31,16 @@ export default function FontSize() {
     width: "150px",
     maxWidth: "100",
     margin: "0 auto",
-    position: "fixed",
     left: "10px",
     bottom: "10px",
     border: "1px solid #ccc",
     zIndex: 15222,
   };
-  const h3 = {
+  const h2 = {
     border: "none",
     width: "100%",
     color: "#727272",
+    marginBottom: "15px",
   };
   const button = {
     background: "#727272 ",
@@ -60,9 +52,9 @@ export default function FontSize() {
 
   return (
     <>
-      {IsVisible && (
+      <h2 style={h2}>ajuste o zoom </h2>
+      {
         <div style={div}>
-          <h3 style={h3}>ajuste o Zoom </h3>
           <button style={button} onClick={diminuirfont}>
             <BiMinus fontSize={"18px"} />
           </button>
@@ -71,7 +63,7 @@ export default function FontSize() {
             <BiPlus fontSize={"18px"} />
           </button>
         </div>
-      )}
+      }
     </>
   );
 }

@@ -2,7 +2,6 @@ import style from "./Home.module.css";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import FontSize from "../function/FontSize";
 
 import Form from "../layout/Form";
 import Header from "../layout/Header";
@@ -11,7 +10,6 @@ import Table from "../layout/Table";
 export default function Home() {
   const [caixa, setCaixa] = useState(0);
   const [entrada, setEntrada] = useState([]);
-
   const [saida, setSaida] = useState([]);
   const [arrayDB, setArrayDB] = useState([]);
 
@@ -74,7 +72,6 @@ export default function Home() {
 
   return (
     <main className={style.main}>
-      <FontSize />
       <Header entrada={entrada} saida={saida} caixa={caixa} />
       <Form GetDB={GetDB} />
       <Table arrayDB={arrayDB} />

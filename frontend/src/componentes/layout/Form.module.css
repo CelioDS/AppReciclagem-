@@ -17,6 +17,9 @@
   padding: 5px;
   margin: 10px auto;
 }
+.form > input[type="date"] {
+  display: none;
+}
 .form > div select {
   height: 37px;
   display: flex;

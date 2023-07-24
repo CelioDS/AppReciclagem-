@@ -5,7 +5,7 @@ import App from "./App";
 
 // paginas
 import Error from "./componentes/layout/Error";
-import Cadastrar from "./componentes/routes/Cadastrar";
+import Configuracao from "./componentes/routes/Configuracao";
 import Home from './componentes/routes/Home'
 
 
@@ -19,8 +19,8 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        path: "/Cadastrar",
-        element: <Cadastrar />,
+        path: "/Configuracao",
+        element: <Configuracao />,
       },
       {
         path: "/",

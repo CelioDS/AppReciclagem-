@@ -13,7 +13,6 @@ function App() {
     localStorage.getItem("FontSize") || 1
   );
   useState(() => {
-    console.log(localStorage.getItem("FontSize"));
     setZoomPage(localStorage.getItem("FontSize"));
   }, [zoomPage]);
 

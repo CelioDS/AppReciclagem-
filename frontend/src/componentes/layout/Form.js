@@ -28,6 +28,7 @@ export default function Form({ GetDB }) {
       !dadosForm.dataNew.value ||
       !dadosForm.movimentacao.value ||
       !dadosForm.descricao.value ||
+      !dadosForm.quantidade.value ||
       !dadosForm.valor.value
     ) {
       setIsSubmit(false); // Reabilita o botão após o envio do formulário
@@ -40,6 +41,7 @@ export default function Form({ GetDB }) {
           dataNew: `${hora} ${dataInvertida}`,
           movimentacao: dadosForm.movimentacao.value,
           descricao: dadosForm.descricao.value,
+          quantidade: dadosForm.quantidade.value,
           valor: dadosForm.valor.value,
         })
         .then(({ data }) => toast.success(data))
@@ -47,6 +49,7 @@ export default function Form({ GetDB }) {
     }
     dadosForm.dataNew.value = "";
     dadosForm.movimentacao.value = "";
+    dadosForm.quantidade.value = "";
     dadosForm.descricao.value = "";
     dadosForm.valor.value = "";
 
@@ -71,16 +74,18 @@ export default function Form({ GetDB }) {
 
   return (
     <form ref={ref} onSubmit={handleSubmit} className={style.form}>
-      <Input
-        text="DATA"
-        placeholder="data"
-        type="date"
-        id="dataNew"
-        name="dataNew"
-        className={style.input}
-        value={currentDate} // Usar o estado currentDate como valor do campo de data
-        onChange={(e) => setCurrentDate(e.target.value)} // Atualizar o estado currentDate quando o valor do campo mudar
-      />
+      <div style={{ display: "none" }}>
+        <Input
+          text="DATA"
+          placeholder="data"
+          type="date"
+          id="dataNew"
+          name="dataNew"
+          className={style.input}
+          value={currentDate} // Usar o estado currentDate como valor do campo de data
+          onChange={(e) => setCurrentDate(e.target.value)} // Atualizar o estado currentDate quando o valor do campo mudar
+        />
+      </div>
       <div className={style.selectInput}>
         <label>MOVIMENTAÇÂO</label>
         <select id="movimentacao">
@@ -97,6 +102,16 @@ export default function Form({ GetDB }) {
         type="text"
         id="descricao"
         name="descricao"
+        className={style.input}
+      />
+      <Input
+        text="Quantidade(KG)"
+        placeholder="Digite o peso KG"
+        type="text"
+        id="quantidade"
+        name="quantidade"
+        min="0"
+        onChange={handleNumber}
         className={style.input}
       />
       <Input
