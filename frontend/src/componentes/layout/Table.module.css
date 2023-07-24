@@ -2,7 +2,7 @@ section {
   width: 98%;
   margin: 0 auto;
   max-height: 50vh;
-  font-size: 26px;
+
   overflow-y: scroll; /* Adiciona uma barra de rolagem horizontal quando necessário */
   border-collapse: collapse; /* To remove spacing between table cells */
   margin-bottom: 30px;
@@ -10,10 +10,10 @@ section {
 section table {
   width: 98%;
   margin: 0 auto;
-  font-size: 26px;
+
   border-collapse: collapse; /* To remove spacing between table cells */
   word-break: break-all;
-
+  text-overflow: ellipsis;
   border: 1px solid #d1d1d1;
 }
 
@@ -32,6 +32,7 @@ section table td {
   padding: 8px;
   color: var(--GreyLight);
   background-color: #ffffff;
+  cursor: pointer;
 }
 
 /* Apply hover effect on table rows */
@@ -40,4 +41,5 @@ section table tbody tr:hover {
   z-index: 100;
   filter: drop-shadow(3px 3px 3px #000000);
   box-shadow: 0 0 5px #c4c4c4;
+  transition: all 0.2s;
 }

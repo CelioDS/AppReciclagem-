@@ -11,18 +11,16 @@
   min-width: 215px;
 }
 .selectInput {
-  font-size: 18px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 5px;
   margin: 10px auto;
-  font-size: 26px;
 }
 .form > div select {
   height: 37px;
   display: flex;
-  font-size: 26px;
+
   text-align: center;
 }
 
@@ -45,7 +43,6 @@
   color: var(--GreyDark);
   text-align: center;
   font-weight: bolder;
-  font-size: 26px;
 }
 .form > div input,
 .form > div select {
@@ -62,18 +59,13 @@
   justify-content: center; /* Centralizar o botão */
 }
 .form > div > button {
-  display: flex;
   padding: 8px 16px;
-
   background-color: var(--corCaixa);
   border: none;
   cursor: pointer;
-  font-size: 22px;
   color: #ffffff;
-  align-items: center;
-  text-align: center;
   height: 46px;
-  font-weight: bolder;
+  width: 100px;
 }
 .form > div > button:disabled {
   opacity: 0.2;

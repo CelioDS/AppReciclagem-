@@ -5,14 +5,22 @@ import "react-toastify/dist/ReactToastify.css";
 
 //2 Reproveitamento de estrutura
 import { Outlet } from "react-router-dom";
+import { useState } from "react";
 
 // 4- nagegando entre paginas
-
 function App() {
+  const [zoomPage, setZoomPage] = useState(
+    localStorage.getItem("FontSize") || 1
+  );
+  useState(() => {
+    console.log(localStorage.getItem("FontSize"));
+    setZoomPage(localStorage.getItem("FontSize"));
+  }, [zoomPage]);
+
   return (
-    <div className="App">
+    <div className="App" style={{ zoom: zoomPage }}>
       <NavBar />
-      <Outlet/>
+      <Outlet />
       <ToastContainer
         pauseOnHover={false}
         autoClose={3000}

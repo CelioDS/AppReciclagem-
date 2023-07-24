@@ -1,6 +1,6 @@
 import style from "./Header.module.css";
 
-export default function Header({ entrada, saida, caixa }) {
+export default function Header({entrada, saida, caixa}) {
   return (
     <header className={style.header}>
       <div>

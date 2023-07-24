@@ -2,6 +2,7 @@ import style from "./Home.module.css";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import FontSize from "../function/FontSize";
 
 import Form from "../layout/Form";
 import Header from "../layout/Header";
@@ -73,10 +74,9 @@ export default function Home() {
 
   return (
     <main className={style.main}>
+      <FontSize />
       <Header entrada={entrada} saida={saida} caixa={caixa} />
-
       <Form GetDB={GetDB} />
-
       <Table arrayDB={arrayDB} />
     </main>
   );

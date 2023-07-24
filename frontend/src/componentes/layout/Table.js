@@ -10,6 +10,7 @@ export default function Table({ arrayDB }) {
       <table className={style.table}>
         <thead>
           <tr>
+            {!isMobile && <th>id </th>}
             {!isMobile && <th>data </th>}
             <th>movimentação</th>
             <th>descrição</th>
@@ -19,6 +20,19 @@ export default function Table({ arrayDB }) {
         <tbody>
           {arrayDB.map((dado, id) => (
             <tr key={id}>
+              {!isMobile && (
+                <td
+                  style={
+                    dado.movimentacao === "Entrada"
+                      ? { color: "#008000" }
+                      : dado.movimentacao === "Saida"
+                      ? { color: "#800303fb" }
+                      : { color: "#0099ff" } // Terceiro valor para outra movimentação
+                  }
+                >
+                  {id + 1}
+                </td>
+              )}
               {!isMobile && <td>{dado.dataNew}</td>}
               <td
                 style={
