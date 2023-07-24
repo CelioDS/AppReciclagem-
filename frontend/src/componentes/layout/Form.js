@@ -67,10 +67,12 @@ export default function Form({ GetDB }) {
   function handleValida(e) {
     const dadosForm = ref.current;
     const inputValue = e.target.value;
+
     setTypeMovimentação(inputValue);
 
     if (inputValue === "Caixa") {
       dadosForm.quantidade.value = 0;
+      dadosForm.quantidade.disabled = true; // Desabilitar o campo de entrada
     }
   }
 

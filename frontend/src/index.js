@@ -6,8 +6,8 @@ import App from "./App";
 // paginas
 import Error from "./componentes/layout/Error";
 import Configuracao from "./componentes/routes/Configuracao";
-import Home from './componentes/routes/Home'
-
+import Home from "./componentes/routes/Home";
+import Relatorios from "./componentes/routes/Relatorios";
 
 //1- configurando router
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -21,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/Configuracao",
         element: <Configuracao />,
+      },
+      {
+        path: "/Relatorios",
+        element: <Relatorios />,
       },
       {
         path: "/",

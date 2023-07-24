@@ -10,6 +10,7 @@ export default function NavBar() {
         <h1>FLUXO DE CAIXA</h1>
         <ul>
           <Link to="/"> Inicio</Link>
+          <Link to="/Relatorios"> Relatorios</Link>
           <Link to="/Configuracao">
             <FaCog></FaCog>
           </Link>
