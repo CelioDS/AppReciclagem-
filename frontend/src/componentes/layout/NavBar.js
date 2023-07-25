@@ -84,7 +84,7 @@ export default function NavBar() {
       <main>
         <nav>
           <LinkButton
-            to="/inicio"
+            to="/"
             text="FLUXO DE CAIXA"
             className={styles.logo}
           />
@@ -112,7 +112,7 @@ export default function NavBar() {
               style={linkActive === "Inicio" ? { color: "#00c3ff" } : {}}
               onClick={openMenu}
               className="btn"
-              to="/Inicio"
+              to="/"
             >
               Inicio
             </Link>
