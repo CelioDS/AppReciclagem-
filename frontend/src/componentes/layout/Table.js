@@ -1,5 +1,5 @@
 import style from "./Table.module.css";
-import Mobile from "../Function/CheckMobile";
+import Mobile from "../function/CheckMobile";
 import { useCallback } from "react";
 
 import Loading from "./Loading";

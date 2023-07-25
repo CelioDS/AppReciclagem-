@@ -1,7 +1,6 @@
 import style from "./Configuracao.module.css";
-import FontSize from "../Function/FontSize";
-import ChangeColor from "../Function/ChangeColor";
-
+import ChangeColor from "../function/ChangeColor";
+import FontSize from "../function/FontSize";
 import { useEffect } from "react";
 
 export default function Configuracao() {

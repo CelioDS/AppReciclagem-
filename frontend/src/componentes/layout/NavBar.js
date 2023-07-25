@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState, useCallback } from "react";
 
 import LinkButton from "../layout/LinkButton";
-import CheckMobile from "../Function/CheckMobile";
+import CheckMobile from "../function/CheckMobile";
 
 export default function NavBar() {
   const checkMobile = useCallback(CheckMobile, []);
