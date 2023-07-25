@@ -1,9 +1,10 @@
-import style from "./Configuracao.module.css";
+import style from "./Relatorios.module.css";
 import Estoque from "../layout/Estoque";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../layout/Header";
+import Table from "../layout/Table";
 
 export default function Relatorios() {
   const [caixa, setCaixa] = useState([]);
@@ -16,28 +17,15 @@ export default function Relatorios() {
   const [plastico, setPlastico] = useState([]);
 
   useEffect(() => {
-    document.title = "Relatorios - BusinessHere";
+    document.title = "Relatorios - fluxo de caixa";
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function filterByCurrentMonth(dataArray) {
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth() + 1; // Os meses em JavaScript são indexados em zero (janeiro é 0), por isso adicionamos 1 ao mês atual.
-
-    return dataArray.filter((data) => {
-      const dataParts = data.dataNew.split("-");
-      const dataMonth = parseInt(dataParts[1]);
-
-      return dataMonth === currentMonth;
-    });
-  }
-
   async function GetDB() {
     try {
       const res = await axios.get(process.env.REACT_APP_DB_API);
-      const filteredData = filterByCurrentMonth(res.data.reverse());
-      setArrayDB(filteredData);
+      setArrayDB(res.data.reverse());
     } catch (error) {
       toast.error(error);
     }
@@ -109,10 +97,12 @@ export default function Relatorios() {
 
   return (
     <main className={style.main}>
-      <h1>Relatorios</h1>
+      <h1>Estoque de material </h1>
       <br />
       <Estoque papelao={papelao} ferro={ferro} plastico={plastico} />
       <Header entrada={entrada} saida={saida} caixa={caixa} />
+      <h1>relatorio de todos os meses</h1>
+      <Table arrayDB={arrayDB} />
     </main>
   );
 }

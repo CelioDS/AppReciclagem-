@@ -131,7 +131,7 @@ export default function Form({ GetDB }) {
       )}
 
       <Input
-        text="Quantidade(KG)"
+        text="QUANTIDADE(KG)"
         placeholder="Digite o peso KG"
         type="text"
         id="quantidade"

@@ -6,7 +6,7 @@
 }
 
 nav {
-  background-color: #245297;
+  background-color: #407c9e;
   height: 60px;
   width: 100%;
   display: flex;
@@ -20,7 +20,7 @@ nav {
 nav > .logo {
   text-decoration: none;
   font-weight: bolder;
-  color: #00c3ff;
+  color: #ffffff;
   cursor: pointer;
   font-size: 28px;
   height: 36px;
@@ -121,7 +121,7 @@ nav > ul > a:hover:before {
     position: absolute;
     top: 60px;
     right: 0;
-    width: 50%;
+    width: 35%;
     height: 0;
     background-color: inherit;
     overflow: hidden;

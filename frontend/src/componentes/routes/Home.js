@@ -25,7 +25,7 @@ export default function Home() {
     });
   }
   useEffect(() => {
-    document.title = "Inicio - BusinessHere";
+    document.title = "Inicio - fluxo de caixa";
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
