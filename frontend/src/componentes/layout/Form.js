@@ -37,14 +37,20 @@ export default function Form({ GetDB }) {
     } else {
       const dataParts = dadosForm.dataNew.value.split("-");
       const dataInvertida = dataParts.reverse().join("-");
-      await axios
-        .post(process.env.REACT_APP_DB_API, {
-          dataNew: `${hora} ${dataInvertida}`,
-          movimentacao: dadosForm.movimentacao.value,
-          descricao: dadosForm.descricao.value,
-          quantidade: dadosForm.quantidade.value,
-          valor: dadosForm.valor.value,
-        })
+
+      setTimeout(async () => {
+        await axios.post(
+          process.env.REACT_APP_DB_API,
+          {
+            dataNew: `${hora} ${dataInvertida}`,
+            movimentacao: dadosForm.movimentacao.value,
+            descricao: dadosForm.descricao.value,
+            quantidade: dadosForm.quantidade.value,
+            valor: dadosForm.valor.value,
+          },
+          5000
+        );
+      })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
     }
@@ -120,7 +126,7 @@ export default function Form({ GetDB }) {
         />
       ) : (
         <div className={style.selectInput}>
-          <label>MOVIMENTAÇÂO</label>
+          <label>DESCRIÇÃO</label>
           <select id="descricao" onChange={handleValida}>
             <option value="">Selecione</option>
             <option value="ferro">ferro</option>
