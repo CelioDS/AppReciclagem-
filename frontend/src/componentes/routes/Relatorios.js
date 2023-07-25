@@ -15,6 +15,12 @@ export default function Relatorios() {
   const [papelao, setPapelao] = useState([]);
   const [plastico, setPlastico] = useState([]);
 
+  useEffect(() => {
+    document.title = "Relatorios - BusinessHere";
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function filterByCurrentMonth(dataArray) {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth() + 1; // Os meses em JavaScript são indexados em zero (janeiro é 0), por isso adicionamos 1 ao mês atual.

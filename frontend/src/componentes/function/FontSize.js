@@ -34,7 +34,6 @@ export default function FontSize() {
     left: "10px",
     bottom: "10px",
     border: "1px solid #ccc",
-    zIndex: 15222,
   };
   const h2 = {
     border: "none",

@@ -1,5 +1,5 @@
 import style from "./Table.module.css";
-import Mobile from "../function/CheckMobile";
+import Mobile from "../Function/CheckMobile";
 import { useCallback } from "react";
 
 import Loading from "./Loading";
@@ -19,7 +19,7 @@ export default function Table({ arrayDB }) {
             <th>descrição</th>
             <th>quantidade(KG)</th>
             <th>valor</th>
-            <th>preço por KG</th>
+            {!isMobile && <th>preço por KG</th>}
           </tr>
         </thead>
         <tbody>
@@ -71,11 +71,13 @@ export default function Table({ arrayDB }) {
                   >
                     {valor}
                   </td>
-                  <td>
-                    {movimentacao !== "Caixa"
-                      ? parseFloat(valor / quantidade).toFixed(2)
-                      : "-"}
-                  </td>
+                  {!isMobile && (
+                    <td>
+                      {movimentacao !== "Caixa"
+                        ? parseFloat(valor / quantidade).toFixed(2)
+                        : "-"}
+                    </td>
+                  )}
                 </tr>
               )
             )

@@ -24,6 +24,11 @@ export default function Home() {
       return dataMonth === currentMonth;
     });
   }
+  useEffect(() => {
+    document.title = "Inicio - BusinessHere";
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function GetDB() {
     try {

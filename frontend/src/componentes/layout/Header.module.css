@@ -9,11 +9,8 @@
   border-bottom: 1px solid var(--GreyCCC);
   margin-bottom: 30px;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.3); /* Cor de fundo transparente */
-  backdrop-filter: blur(10px); /* Desfoque para criar o efeito glass */
-  border-radius: 10px;
+
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra para realçar o efeito */
 }
 .header div {
   position: relative;
@@ -70,7 +67,7 @@
 }
 
 .header div:nth-child(1) {
-  border: 1px solid var(--corEntrada) ;
+  border: 1px solid var(--corEntrada);
   border-top: 10px solid var(--EntradaLight);
   filter: drop-shadow(3px 3px 3px var(--corShadow));
 }
