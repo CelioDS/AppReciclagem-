@@ -122,13 +122,13 @@ export default function Form({ GetDB }) {
           <label>DESCRIÇÃO</label>
           <select id="descricao" onChange={handleValida}>
             <option value="">Selecione</option>
-            <option value="ferro">ferro</option>
-            <option value="plastico">plastico</option>
-            <option value="papelao">papelao</option>
+            <option value="ferro">Ferro</option>
+            <option value="plastico">Plastico</option>
+            <option value="papelao">Papelao</option>
             {AtivarOption && (
               <>
-                <option value="funcionarios">funcionarios</option>
-                <option value="gastosEmpresa">gastos da empresa</option>
+                <option value="funcionarios">Funcionarios</option>
+                <option value="gastosEmpresa">Gastos da empresa</option>
               </>
             )}
           </select>
@@ -146,7 +146,7 @@ export default function Form({ GetDB }) {
         className={style.input}
       />
       <Input
-        text="VALOR"
+        text="VALOR(R$)"
         placeholder="Digite o Valor aqui"
         type="text"
         id="valor"
