@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 export default function Configuracao() {
   useEffect(() => {
-    document.title = "Configuracao - fluxo de caixa";
+    document.title = "fluxo de caixa - Configuracao";
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
