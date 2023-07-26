@@ -31,7 +31,7 @@ export default function Relatorios() {
 
   return (
     <main className={style.main}>
-      <h1>Relatorio</h1>
+      <h1> Estoque</h1>
       <Table arrayDB={arrayDB} currentPage={"relatorios"} />
     </main>
   );

@@ -36,7 +36,7 @@ export default function Header({
             CAIXA
           </h1>
           <span>
-            <h1>R$ { caixa + entrada - saida}</h1>
+            <h1>R$ {caixa + entrada - saida}</h1>
           </span>
         </div>
       </section>
