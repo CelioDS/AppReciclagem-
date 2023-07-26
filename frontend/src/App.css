@@ -74,6 +74,28 @@ h1 {
   border-radius: 3px;
   border: 1px solid #ccc;
 }
+.erro {
+  animation: shake 0.3s linear infinite;
+}
+
+@keyframes shake {
+  from {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-2px) rotate(-1deg) ;
+  }
+  50% {
+    transform: translateX(2px) ;
+    border: 1px solid #ff0000;
+  }
+  75% {
+    transform: translateX(-2px) rotate(1deg) ;
+  }
+  to {
+    transform: translateX(0) translateY(0) rotate(0deg) ;
+  }
+}
 
 .login-button {
   width: 100%;
