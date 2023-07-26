@@ -26,7 +26,10 @@ function App() {
       user === process.env.REACT_APP_USER &&
       pass === process.env.REACT_APP_PASS
     ) {
-      setPermission(true);
+      setTimeout(() => {
+        setPermission(true);
+      }, 1000);
+
       localStorage.setItem("user", process.env.REACT_APP_USER);
       localStorage.setItem("pass", process.env.REACT_APP_PASS);
     }
@@ -39,7 +42,9 @@ function App() {
       user === process.env.REACT_APP_USER &&
       pass === process.env.REACT_APP_PASS
     ) {
-      setPermission(true);
+      setTimeout(() => {
+        setPermission(true);
+      }, 1000);
       localStorage.setItem("user", process.env.REACT_APP_USER);
       localStorage.setItem("pass", process.env.REACT_APP_PASS);
     } else {
