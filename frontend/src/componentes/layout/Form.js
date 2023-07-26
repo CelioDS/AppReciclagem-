@@ -74,7 +74,7 @@ export default function Form({ GetDB }) {
       ? setAtivarOption(true)
       : setAtivarOption(false);
 
-    if (inputValue === "Caixa") {
+    if (inputValue === "Caixa" || inputValue === "funcionarios" || inputValue === 'gastosEmpresa') {
       dadosForm.quantidade.value = 0;
       dadosForm.quantidade.disabled = true; // Desabilitar o campo de entrada
     } else {
