@@ -29,7 +29,8 @@ function App() {
       localStorage.setItem("user", process.env.REACT_APP_USER);
       localStorage.setItem("pass", process.env.REACT_APP_PASS);
     }
-  }, []);
+  }, [pass, user]);
+
   function handleLogin() {
     if (
       user === process.env.REACT_APP_USER &&
