@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 
 import axios from "axios";
 
@@ -11,8 +11,8 @@ import style from "./Form.module.css";
 export default function Form({ GetDB }) {
   const [isSubmit, setIsSubmit] = useState(false);
   const [typeMovimentação, setTypeMovimentação] = useState();
+  const [AtivarOption, setAtivarOption] = useState(false);
   const ref = useRef();
-  const [hora, setHora] = useState(new Date());
   const [currentDate, setCurrentDate] = useState(
     new Date().toISOString().split("T")[0]
   ); // Estado para controlar o valor do campo de data
@@ -39,7 +39,7 @@ export default function Form({ GetDB }) {
       const dataInvertida = dataParts.reverse().join("-");
       await axios
         .post(process.env.REACT_APP_DB_API, {
-          dataNew: `${hora} ${dataInvertida}`,
+          dataNew: ` ${dataInvertida}`,
           movimentacao: dadosForm.movimentacao.value,
           descricao: dadosForm.descricao.value,
           quantidade: dadosForm.quantidade.value,
@@ -70,19 +70,18 @@ export default function Form({ GetDB }) {
 
     setTypeMovimentação(inputValue);
 
+    dadosForm.movimentacao.value === "Saida"
+      ? setAtivarOption(true)
+      : setAtivarOption(false);
+
     if (inputValue === "Caixa") {
       dadosForm.quantidade.value = 0;
       dadosForm.quantidade.disabled = true; // Desabilitar o campo de entrada
+    } else {
+      dadosForm.quantidade.value = "";
+      dadosForm.quantidade.disabled = false;
     }
   }
-
-  useEffect(() => {
-    const now = new Date();
-    const hour = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-    const seconds = String(now.getSeconds()).padStart(2, "0");
-    setHora(`${hour}:${minutes}:${seconds}`); // Atualiza o estado com o horário atual
-  }, []); // O segundo argumento vazio indica que este efeito será executado apenas uma vez na montagem do componente
 
   return (
     <form ref={ref} onSubmit={handleSubmit} className={style.form}>
@@ -124,8 +123,14 @@ export default function Form({ GetDB }) {
           <select id="descricao" onChange={handleValida}>
             <option value="">Selecione</option>
             <option value="ferro">ferro</option>
-            <option value="papelao">papelao</option>
             <option value="plastico">plastico</option>
+            <option value="papelao">papelao</option>
+            {AtivarOption && (
+              <>
+                <option value="funcionarios">funcionarios</option>
+                <option value="gastosEmpresa">gastos da empresa</option>
+              </>
+            )}
           </select>
         </div>
       )}

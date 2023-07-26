@@ -1,16 +1,48 @@
 section {
   width: 98%;
   margin: 0 auto;
-  max-height: 50vh;
-
-  overflow-y: scroll; /* Adiciona uma barra de rolagem horizontal quando necessário */
-  border-collapse: collapse; /* To remove spacing between table cells */
   margin-bottom: 30px;
+}
+section .plate {
+  background-color: transparent;
+}
+section .filter {
+  display: flex;
+  justify-content: space-around;
+  color: var(--GreyDark);
+}
+section .filter button {
+  padding: 2px 5px;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid var(--GreyCCC);
+  transition: all 0.8s;
+}
+section .filter button:hover {
+  color: #007bff;
+  background-color: rgb(224, 223, 223);
+}
+section .filter button span {
+  display: inline-flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+section .filter > div select option {
+  color: var(--GreyDark);
+}
+
+section .filter > div select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px #007bff;
 }
 section table {
   width: 98%;
   margin: 0 auto;
-
+  overflow-y: scroll; /* Adiciona uma barra de rolagem horizontal quando necessário */
+  border-collapse: collapse; /* To remove spacing between table cells */
   border-collapse: collapse; /* To remove spacing between table cells */
   word-break: break-all;
   text-overflow: ellipsis;
