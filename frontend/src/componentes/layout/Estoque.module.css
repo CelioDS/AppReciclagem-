@@ -16,6 +16,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+.header > div h1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
   cursor: pointer;
 }
 .header div:hover {
@@ -39,10 +48,8 @@
   text-align: center;
 }
 
-
 @media (max-width: 900px) {
-  .header{
+  .header {
     flex-direction: column;
   }
-  
 }
