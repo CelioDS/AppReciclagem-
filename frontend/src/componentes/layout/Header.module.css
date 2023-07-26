@@ -58,6 +58,22 @@
   color: var(--corSaida);
 }
 
+.header section:nth-child(1) div > h1 svg {
+  animation: pulso 2s linear infinite;
+}
+
+@keyframes pulso {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+    background: none;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .header section:nth-child(1) div:nth-child(1) > h1 svg {
   color: var(--corEntrada);
   background-color: var(--EntradaLight);

@@ -18,8 +18,8 @@ export default function Table({ arrayDB, currentPage }) {
   const [papelao, setPapelao] = useState(0);
   const [ferro, setFerro] = useState(0);
   const [plastico, setPlastico] = useState(0);
-  const [funcionarios, setfuncionarios] = useState(0);
-  const [gastosEmpresa, setgastosEmpresa] = useState(0);
+  const [funcionarios, setFuncionarios] = useState(0);
+  const [gastosEmpresa, setGastosEmpresa] = useState(0);
   useEffect(() => {
     // Filtrar os dados do mês selecionado
     const filteredData = arrayDB.filter(({ dataNew }) => {
@@ -46,41 +46,48 @@ export default function Table({ arrayDB, currentPage }) {
     setSaida(saidaValue);
 
     const papelaoValue = filteredData.reduce((total, data) => {
-      return data.descricao === "papelao" && data.movimentacao === "Entrada"
-        ? total + data.quantidade
-        : total;
+      if (data.descricao === "papelao") {
+        return data.movimentacao === "Entrada"
+          ? total + data.quantidade
+          : total - data.quantidade;
+      }
+      return total;
     }, 0);
     setPapelao(papelaoValue);
 
     const ferroValue = filteredData.reduce((total, data) => {
-      return data.descricao === "ferro" && data.movimentacao === "Entrada"
-        ? total + data.quantidade
-        : total;
+      if (data.descricao === "ferro") {
+        return data.movimentacao === "Entrada"
+          ? total + data.quantidade
+          : total - data.quantidade;
+      }
+      return total;
     }, 0);
     setFerro(ferroValue);
 
     const plasticoValue = filteredData.reduce((total, data) => {
-      return data.descricao === "plastico" && data.movimentacao === "Entrada"
-        ? total + data.quantidade
-        : total;
+      if (data.descricao === "plastico") {
+        return data.movimentacao === "Entrada"
+          ? total + data.quantidade
+          : total - data.quantidade;
+      }
+      return total;
     }, 0);
     setPlastico(plasticoValue);
 
-    const funcionariosvalue = filteredData.reduce((total, data) => {
-      return data.descricao === "Funcionarios" &&
-        data.movimentacao === "Entrada"
-        ? total + data.quantidade
+const custoFuncionario = filteredData.reduce((total, data) => {
+      return data.descricao === "funcionarios" && data.movimentacao === "Saida"
+        ? total + data.valor
         : total;
     }, 0);
-    setfuncionarios(funcionariosvalue);
+    setFuncionarios(custoFuncionario);
 
     const gastosEmpresavalue = filteredData.reduce((total, data) => {
-      return data.descricao === "gastoEmpresa" &&
-        data.movimentacao === "Entrada"
-        ? total + data.quantidade
+      return data.descricao === "gastosEmpresa" && data.movimentacao === "Saida"
+        ? total + data.valor
         : total;
     }, 0);
-    setgastosEmpresa(gastosEmpresavalue);
+    setGastosEmpresa(gastosEmpresavalue);
   }, [arrayDB, searchMonth]);
 
   function handleMonthChange(e) {
