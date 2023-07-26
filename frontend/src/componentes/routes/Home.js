@@ -103,7 +103,7 @@ export default function Home() {
     <main className={style.main}>
       <h1>Fluxo de caixa</h1>
       <div>
-        <BarChart entrada={entrada} saida={saida} caixa={caixa} />
+        <BarChart entrada={entrada} saida={saida} caixa={caixa + entrada - saida} />
       </div>
 
       <Header
