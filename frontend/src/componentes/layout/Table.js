@@ -75,7 +75,7 @@ export default function Table({ arrayDB, currentPage }) {
     }, 0);
     setPlastico(plasticoValue);
 
-const custoFuncionario = filteredData.reduce((total, data) => {
+    const custoFuncionario = filteredData.reduce((total, data) => {
       return data.descricao === "funcionarios" && data.movimentacao === "Saida"
         ? total + data.valor
         : total;
@@ -226,6 +226,14 @@ const custoFuncionario = filteredData.reduce((total, data) => {
           </tr>
         </thead>
         <tbody>
+          {saida === 0 && caixa === 0 && entrada === 0 && (
+            <tr>
+              <td key={1} colSpan={7}>
+                <h4>Sem cadastros!!!</h4>
+                <Loading></Loading>
+              </td>
+            </tr>
+          )}
           {arrayDB.length === 0 ? (
             <tr>
               <td colSpan={7}>
@@ -251,6 +259,8 @@ const custoFuncionario = filteredData.reduce((total, data) => {
                   valor,
                 }) => (
                   <tr key={id}>
+                    {console.log()}
+
                     {!isMobile && (
                       <td
                         style={
