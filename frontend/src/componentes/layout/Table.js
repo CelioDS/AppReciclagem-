@@ -48,8 +48,8 @@ export default function Table({ arrayDB, currentPage }) {
     const papelaoValue = filteredData.reduce((total, data) => {
       if (data.descricao === "papelao") {
         return data.movimentacao === "Entrada"
-          ? total + data.quantidade
-          : total - data.quantidade;
+          ? total + parseInt(data.quantidade)
+          : total - parseInt(data.quantidade);
       }
       return total;
     }, 0);
@@ -58,8 +58,8 @@ export default function Table({ arrayDB, currentPage }) {
     const ferroValue = filteredData.reduce((total, data) => {
       if (data.descricao === "ferro") {
         return data.movimentacao === "Entrada"
-          ? total + data.quantidade
-          : total - data.quantidade;
+          ? total + parseInt(data.quantidade)
+          : total - parseInt(data.quantidade);
       }
       return total;
     }, 0);
@@ -68,8 +68,8 @@ export default function Table({ arrayDB, currentPage }) {
     const plasticoValue = filteredData.reduce((total, data) => {
       if (data.descricao === "plastico") {
         return data.movimentacao === "Entrada"
-          ? total + data.quantidade
-          : total - data.quantidade;
+          ? total + parseInt(data.quantidade)
+          : total - parseInt(data.quantidade);
       }
       return total;
     }, 0);
