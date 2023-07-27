@@ -7,8 +7,6 @@ import Form from "../layout/Form";
 import Header from "../layout/Header";
 import Table from "../layout/Table";
 
-import BarChart from "../graficos/BarChart";
-
 export default function Home() {
   const [caixa, setCaixa] = useState([]);
   const [entrada, setEntrada] = useState([]);
@@ -102,9 +100,6 @@ export default function Home() {
   return (
     <main className={style.main}>
       <h1>Fluxo de caixa</h1>
-      <div>
-        <BarChart entrada={entrada} saida={saida} caixa={caixa + entrada - saida} />
-      </div>
 
       <Header
         entrada={entrada}
