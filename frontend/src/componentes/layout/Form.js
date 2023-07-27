@@ -11,6 +11,7 @@ import style from "./Form.module.css";
 export default function Form({ GetDB }) {
   const [isSubmit, setIsSubmit] = useState(false);
   const [typeMovimentação, setTypeMovimentação] = useState();
+  const [typeQuantidade, setTypeQuantidade] = useState("");
   const [AtivarOption, setAtivarOption] = useState(false);
   const ref = useRef();
   const [currentDate, setCurrentDate] = useState(
@@ -74,7 +75,16 @@ export default function Form({ GetDB }) {
       ? setAtivarOption(true)
       : setAtivarOption(false);
 
-    if (inputValue === "Caixa" || inputValue === "funcionarios" || inputValue === 'gastosEmpresa') {
+    if (
+      dadosForm.descricao.value === "funcionarios" ||
+      dadosForm.descricao.value === "gastosEmpresa"
+    ) {
+      setTypeQuantidade("especifique");
+    } else {
+      setTypeQuantidade("");
+    }
+
+    if (inputValue === "Caixa") {
       dadosForm.quantidade.value = 0;
       dadosForm.quantidade.disabled = true; // Desabilitar o campo de entrada
     } else {
@@ -134,17 +144,28 @@ export default function Form({ GetDB }) {
           </select>
         </div>
       )}
+      {typeQuantidade === "especifique" ? (
+        <Input
+          text="ESPECIFIQUE"
+          placeholder="Digite o motivo "
+          type="text"
+          id="quantidade"
+          name="quantidade"
+          className={style.input}
+        />
+      ) : (
+        <Input
+          text="QUANTIDADE(KG)"
+          placeholder="Digite o peso KG"
+          type="text"
+          id="quantidade"
+          name="quantidade"
+          min="0"
+          onChange={handleNumber}
+          className={style.input}
+        />
+      )}
 
-      <Input
-        text="QUANTIDADE(KG)"
-        placeholder="Digite o peso KG"
-        type="text"
-        id="quantidade"
-        name="quantidade"
-        min="0"
-        onChange={handleNumber}
-        className={style.input}
-      />
       <Input
         text="VALOR(R$)"
         placeholder="Digite o Valor aqui"
