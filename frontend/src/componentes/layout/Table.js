@@ -216,7 +216,6 @@ export default function Table({ arrayDB, currentPage }) {
       <table className={style.table}>
         <thead>
           <tr>
-            {!isMobile && <th>id </th>}
             {!isMobile && <th>data </th>}
             <th>movimentação</th>
             <th>descrição</th>
@@ -258,22 +257,16 @@ export default function Table({ arrayDB, currentPage }) {
                   movimentacao,
                   valor,
                 }) => (
-                  <tr key={id}>
-                    {console.log()}
-
-                    {!isMobile && (
-                      <td
-                        style={
-                          movimentacao === "Entrada"
-                            ? { color: "#008000" }
-                            : movimentacao === "Saida"
-                            ? { color: "#800303fb" }
-                            : { color: "#0099ff" } // Terceiro valor para outra movimentação
-                        }
-                      >
-                        {id + 1}
-                      </td>
-                    )}
+                  <tr
+                    key={id}
+                    style={
+                      movimentacao === "Entrada"
+                        ? { background: "#d9f0cf" }
+                        : movimentacao === "Saida"
+                        ? { color: "#800303fb", background: "#FFC0CB" }
+                        : { color: "#0099ff", background: "#87CEEB" } // Terceiro valor para outra movimentação
+                    }
+                  >
                     {!isMobile && <td>{dataNew}</td>}
                     <td
                       style={
@@ -293,8 +286,8 @@ export default function Table({ arrayDB, currentPage }) {
                         movimentacao === "Entrada"
                           ? { color: "#008000", background: "#d9f0cf" }
                           : movimentacao === "Saida"
-                          ? { color: "#800303fb", background: "#FFC0CB" }
-                          : { color: "#0099ff", background: "#87CEEB" } // Terceiro valor para outra movimentação
+                          ? { background: "#FFC0CB" }
+                          : { background: "#87CEEB" } // Terceiro valor para outra movimentação
                       }
                     >
                       {valor}
