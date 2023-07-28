@@ -5,10 +5,12 @@ import { FaDownload, FaTrash, FaPen } from "react-icons/fa"; // Importe o ícone
 import Loading from "./Loading";
 import Estoque from "./Estoque";
 import Header from "./Header";
-import axios from "axios";
+
 import { toast } from "react-toastify";
 
-export default function Table({ arrayDB, currentPage }) {
+import axios from "axios";
+
+export default function Table({ currentPage }) {
   const checkMobile = useCallback(Mobile, []);
   const isMobile = checkMobile();
 
@@ -22,11 +24,25 @@ export default function Table({ arrayDB, currentPage }) {
   const [plastico, setPlastico] = useState(0);
   const [funcionarios, setFuncionarios] = useState(0);
   const [gastosEmpresa, setGastosEmpresa] = useState(0);
-  const [arrayDb, setArrayDB] = useState(arrayDB);
+  const [arrayDB, setArrayDB] = useState([]);
+
+  async function GetDB() {
+    try {
+      const res = await axios.get(process.env.REACT_APP_DB_API);
+      setArrayDB(res.data.reverse());
+    } catch (error) {
+      toast.error(error);
+    }
+  }
+
+  useEffect(() => {
+    GetDB();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setArrayDB]);
 
   useEffect(() => {
     // Filtrar os dados do mês selecionado
-    const filteredData = arrayDb.filter(({ dataNew }) => {
+    const filteredData = arrayDB.filter(({ dataNew }) => {
       if (!searchMonth) return true;
       const partMonth = dataNew.split("-");
       const month = partMonth[1];
@@ -92,7 +108,7 @@ export default function Table({ arrayDB, currentPage }) {
         : total;
     }, 0);
     setGastosEmpresa(gastosEmpresavalue);
-  }, [arrayDb, searchMonth]);
+  }, [arrayDB, searchMonth]);
 
   function handleMonthChange(e) {
     setSearchMonth(e.target.value);
@@ -132,7 +148,7 @@ export default function Table({ arrayDB, currentPage }) {
     ];
 
     // Dados do arrayDB filtrados pelo mês selecionado
-    const filteredData = arrayDb.filter(({ dataNew }) => {
+    const filteredData = arrayDB.filter(({ dataNew }) => {
       if (!searchMonth) return true;
       const partMonth = dataNew.split("-");
       const month = partMonth[1];
@@ -178,19 +194,21 @@ export default function Table({ arrayDB, currentPage }) {
     link.click();
   }
 
-  async function removerCadastro(id) {
+  async function removeEmpresa(id) {
     await axios
       .delete(process.env.REACT_APP_DB_API + id)
       .then(({ data }) => {
-        const newBD = arrayDb.filter((cadastro) => cadastro.id !== id);
+        const newBD = arrayDB.filter((empresa) => empresa.id !== id);
         setArrayDB(newBD);
         toast.success(data);
       })
       .catch(({ data }) => toast.error(data));
   }
 
-  const remover = (id) => {
-    removerCadastro(id);
+  const remove = (id) => {
+    removeEmpresa(id);
+
+    // navigate(-1); // Navega para a página anterior
   };
 
   return (
@@ -240,8 +258,6 @@ export default function Table({ arrayDB, currentPage }) {
             <th>descrição</th>
             <th>quantidade(KG)</th>
             <th>valor</th>
-            <th>Editar</th>
-            <th>Excluir</th>
           </tr>
         </thead>
         <tbody>
@@ -253,12 +269,14 @@ export default function Table({ arrayDB, currentPage }) {
               </td>
             </tr>
           )}
-          {arrayDb.length === 0 ? (
+          {arrayDB.length === 0 ? (
             <tr>
-              <td colSpan={7}></td>
+              <td colSpan={7}>
+                <Loading></Loading>
+              </td>
             </tr>
           ) : (
-            arrayDb
+            arrayDB
               .filter(({ dataNew }) => {
                 /* filtar o mes */
                 if (!searchMonth) return true;
@@ -318,7 +336,7 @@ export default function Table({ arrayDB, currentPage }) {
                     <td>
                       <button
                         onClick={() => {
-                          remover(id);
+                          remove(id);
                         }}
                       >
                         <FaTrash />
