@@ -1,12 +1,15 @@
 import style from "./Table.module.css";
 import Mobile from "../function/CheckMobile";
 import { useCallback, useState, useEffect } from "react";
-import { FaDownload } from "react-icons/fa"; // Importe o ícone de download da biblioteca
+import { FaDownload, FaTrash, FaPen } from "react-icons/fa"; // Importe o ícone de download da biblioteca
+import axios from "axios";
+import { toast } from "react-toastify";
+
 import Loading from "./Loading";
 import Estoque from "./Estoque";
 import Header from "./Header";
 
-export default function Table({ arrayDB, currentPage }) {
+export default function Table({ currentPage }) {
   const checkMobile = useCallback(Mobile, []);
   const isMobile = checkMobile();
 
@@ -20,6 +23,35 @@ export default function Table({ arrayDB, currentPage }) {
   const [plastico, setPlastico] = useState(0);
   const [funcionarios, setFuncionarios] = useState(0);
   const [gastosEmpresa, setGastosEmpresa] = useState(0);
+  const [arrayDB, setArrayDB] = useState([]);
+
+  function filterByCurrentMonth(dataArray) {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1; // Os meses em JavaScript são indexados em zero (janeiro é 0), por isso adicionamos 1 ao mês atual.
+
+    return dataArray.filter((data) => {
+      const dataParts = data.dataNew.split("-");
+      const dataMonth = parseInt(dataParts[1]);
+
+      return dataMonth === currentMonth;
+    });
+  }
+
+  async function GetDB() {
+    try {
+      const res = await axios.get(process.env.REACT_APP_DB_API);
+      const filteredData = filterByCurrentMonth(res.data.reverse());
+      setArrayDB(filteredData);
+    } catch (error) {
+      toast.error(error);
+    }
+  }
+
+  useEffect(() => {
+    GetDB();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setArrayDB]);
+
   useEffect(() => {
     // Filtrar os dados do mês selecionado
     const filteredData = arrayDB.filter(({ dataNew }) => {
@@ -174,6 +206,20 @@ export default function Table({ arrayDB, currentPage }) {
     link.click();
   }
 
+  async function handleEditar(id) {
+    console.log(id);
+  }
+  async function handleExcluir(id) {
+    await axios
+      .delete(process.env.REACT_APP_DB_API + id)
+      .then(({ data }) => {
+        const newBD = arrayDB.filter((cadastro) => cadastro.id !== id);
+        setArrayDB(newBD);
+        toast.success(data);
+      })
+      .catch(({ data }) => toast.error(data));
+  }
+
   return (
     <section>
       {isReportsPage && (
@@ -185,7 +231,7 @@ export default function Table({ arrayDB, currentPage }) {
               saida={saida}
               caixa={caixa}
               funcionarios={funcionarios}
-              gastosEmpresa={gastosEmpresa}
+              gastoscadastro={gastosEmpresa}
             />
           </div>
 
@@ -222,6 +268,8 @@ export default function Table({ arrayDB, currentPage }) {
             <th>quantidade(KG)</th>
             <th>valor</th>
             {!isMobile && <th>preço por KG</th>}
+            <th>Editar</th>
+            <th>Excluir</th>
           </tr>
         </thead>
         <tbody>
@@ -301,6 +349,24 @@ export default function Table({ arrayDB, currentPage }) {
                           : parseFloat(valor / quantidade).toFixed(2)}
                       </td>
                     )}
+                    <td>
+                      <button
+                        onClick={() => {
+                          handleEditar(id);
+                        }}
+                      >
+                        <FaPen />
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          handleExcluir(id);
+                        }}
+                      >
+                        <FaTrash />
+                      </button>
+                    </td>
                   </tr>
                 )
               )
