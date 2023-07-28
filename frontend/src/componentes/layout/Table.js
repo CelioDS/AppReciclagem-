@@ -9,7 +9,12 @@ import Loading from "./Loading";
 import Estoque from "./Estoque";
 import Header from "./Header";
 
-export default function Table({ currentPage, setEditCadastro }) {
+export default function Table({
+  currentPage,
+  setEditCadastro,
+  arrayDB,
+  setArrayDB,
+}) {
   const checkMobile = useCallback(Mobile, []);
   const isMobile = checkMobile();
 
@@ -23,34 +28,6 @@ export default function Table({ currentPage, setEditCadastro }) {
   const [plastico, setPlastico] = useState(0);
   const [funcionarios, setFuncionarios] = useState(0);
   const [gastosEmpresa, setGastosEmpresa] = useState(0);
-  const [arrayDB, setArrayDB] = useState([]);
-
-  function filterByCurrentMonth(dataArray) {
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth() + 1; // Os meses em JavaScript são indexados em zero (janeiro é 0), por isso adicionamos 1 ao mês atual.
-
-    return dataArray.filter((data) => {
-      const dataParts = data.dataNew.split("-");
-      const dataMonth = parseInt(dataParts[1]);
-
-      return dataMonth === currentMonth;
-    });
-  }
-
-  async function GetDB() {
-    try {
-      const res = await axios.get(process.env.REACT_APP_DB_API);
-      const filteredData = filterByCurrentMonth(res.data.reverse());
-      setArrayDB(filteredData);
-    } catch (error) {
-      toast.error(error);
-    }
-  }
-
-  useEffect(() => {
-    GetDB();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setArrayDB]);
 
   useEffect(() => {
     // Filtrar os dados do mês selecionado
@@ -215,6 +192,8 @@ export default function Table({ currentPage, setEditCadastro }) {
         toast.success(data);
       })
       .catch(({ data }) => toast.error(data));
+
+    setEditCadastro(null);
   }
 
   async function handleEditar(cadastro) {

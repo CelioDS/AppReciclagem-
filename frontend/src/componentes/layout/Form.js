@@ -8,12 +8,17 @@ import Input from "../layout/Input";
 
 import style from "./Form.module.css";
 
-export default function Form({ GetDB, EditCadastro, setEditCadastro }) {
+export default function Form({
+  GetDB,
+  EditCadastro,
+  setEditCadastro,
+}) {
+  const ref = useRef();
   const [isSubmit, setIsSubmit] = useState(false);
   const [typeMovimentação, setTypeMovimentação] = useState();
   const [typeQuantidade, setTypeQuantidade] = useState("");
   const [AtivarOption, setAtivarOption] = useState(false);
-  const ref = useRef();
+
   const [currentDate, setCurrentDate] = useState(
     new Date().toISOString().split("T")[0]
   ); // Estado para controlar o valor do campo de data
@@ -78,7 +83,7 @@ export default function Form({ GetDB, EditCadastro, setEditCadastro }) {
     dadosForm.valor.value = "";
 
     GetDB();
-    setEditCadastro(null)
+    setEditCadastro(null);
     setIsSubmit(false); // Reabilita o botão após o envio do formulário
   }
   function handleNumber(e) {
@@ -140,7 +145,7 @@ export default function Form({ GetDB, EditCadastro, setEditCadastro }) {
           <option value="Caixa">Caixa</option>
         </select>
       </div>
-
+      <h1>arrumar o reaload</h1>
       {typeMovimentação === "Caixa" ? (
         <Input
           text="DESCRIÇÃO"
