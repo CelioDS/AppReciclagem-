@@ -49,7 +49,7 @@ export default function Form({ GetDB, EditCadastro, setEditCadastro }) {
     }
     if (EditCadastro) {
       await axios
-        .put(process.env.REACT_APP_DB_API + EditCadastro.id, {
+        .put(process.env.REACT_APP_DB_API + EditCadastro[0].id, {
           movimentacao: dadosForm.movimentacao.value,
           descricao: dadosForm.descricao.value,
           quantidade: dadosForm.quantidade.value,
