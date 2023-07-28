@@ -1,16 +1,12 @@
 import style from "./Table.module.css";
 import Mobile from "../function/CheckMobile";
 import { useCallback, useState, useEffect } from "react";
-import { FaDownload, FaTrash, FaPen } from "react-icons/fa"; // Importe o ícone de download da biblioteca
+import { FaDownload } from "react-icons/fa"; // Importe o ícone de download da biblioteca
 import Loading from "./Loading";
 import Estoque from "./Estoque";
 import Header from "./Header";
 
-import { toast } from "react-toastify";
-
-import axios from "axios";
-
-export default function Table({ currentPage }) {
+export default function Table({ arrayDB, currentPage }) {
   const checkMobile = useCallback(Mobile, []);
   const isMobile = checkMobile();
 
@@ -24,22 +20,6 @@ export default function Table({ currentPage }) {
   const [plastico, setPlastico] = useState(0);
   const [funcionarios, setFuncionarios] = useState(0);
   const [gastosEmpresa, setGastosEmpresa] = useState(0);
-  const [arrayDB, setArrayDB] = useState([]);
-
-  async function GetDB() {
-    try {
-      const res = await axios.get(process.env.REACT_APP_DB_API);
-      setArrayDB(res.data.reverse());
-    } catch (error) {
-      toast.error(error);
-    }
-  }
-
-  useEffect(() => {
-    GetDB();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setArrayDB]);
-
   useEffect(() => {
     // Filtrar os dados do mês selecionado
     const filteredData = arrayDB.filter(({ dataNew }) => {
@@ -194,23 +174,6 @@ export default function Table({ currentPage }) {
     link.click();
   }
 
-  async function removeEmpresa(id) {
-    await axios
-      .delete(process.env.REACT_APP_DB_API + id)
-      .then(({ data }) => {
-        const newBD = arrayDB.filter((empresa) => empresa.id !== id);
-        setArrayDB(newBD);
-        toast.success(data);
-      })
-      .catch(({ data }) => toast.error(data));
-  }
-
-  const remove = (id) => {
-    removeEmpresa(id);
-
-    // navigate(-1); // Navega para a página anterior
-  };
-
   return (
     <section>
       {isReportsPage && (
@@ -258,6 +221,7 @@ export default function Table({ currentPage }) {
             <th>descrição</th>
             <th>quantidade(KG)</th>
             <th>valor</th>
+            {!isMobile && <th>preço por KG</th>}
           </tr>
         </thead>
         <tbody>
@@ -328,20 +292,15 @@ export default function Table({ currentPage }) {
                     >
                       {valor}
                     </td>
-                    <td>
-                      <button>
-                        <FaPen />
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        onClick={() => {
-                          remove(id);
-                        }}
-                      >
-                        <FaTrash />
-                      </button>
-                    </td>
+                    {!isMobile && (
+                      <td>
+                        {movimentacao === "Caixa" ||
+                        descricao === "funcionarios" ||
+                        descricao === "gastosEmpresa"
+                          ? "-"
+                          : parseFloat(valor / quantidade).toFixed(2)}
+                      </td>
+                    )}
                   </tr>
                 )
               )

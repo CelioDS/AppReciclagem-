@@ -109,7 +109,7 @@ export default function Home() {
         gastosEmpresa={gastosEmpresa}
       />
       <Form GetDB={GetDB} />
-      <Table />
+      <Table arrayDB={arrayDB} />
     </main>
   );
 }
