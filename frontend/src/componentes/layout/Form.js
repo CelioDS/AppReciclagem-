@@ -8,16 +8,11 @@ import Input from "../layout/Input";
 
 import style from "./Form.module.css";
 
-export default function Form({
-  GetDB,
-  EditCadastro,
-  setEditCadastro,
-}) {
+export default function Form({ GetDB, EditCadastro, setEditCadastro }) {
   const ref = useRef();
   const [isSubmit, setIsSubmit] = useState(false);
-  const [typeMovimentação, setTypeMovimentação] = useState();
+
   const [typeQuantidade, setTypeQuantidade] = useState("");
-  const [AtivarOption, setAtivarOption] = useState(false);
 
   const [currentDate, setCurrentDate] = useState(
     new Date().toISOString().split("T")[0]
@@ -46,7 +41,6 @@ export default function Form({
       !dadosForm.dataNew.value ||
       !dadosForm.movimentacao.value ||
       !dadosForm.descricao.value ||
-      !dadosForm.quantidade.value ||
       !dadosForm.valor.value
     ) {
       setIsSubmit(false); // Reabilita o botão após o envio do formulário
@@ -97,12 +91,6 @@ export default function Form({
     const dadosForm = ref.current;
     const inputValue = e.target.value;
 
-    setTypeMovimentação(inputValue);
-
-    dadosForm.movimentacao.value === "Saida"
-      ? setAtivarOption(true)
-      : setAtivarOption(false);
-
     if (
       dadosForm.descricao.value === "funcionarios" ||
       dadosForm.descricao.value === "gastosEmpresa"
@@ -145,33 +133,16 @@ export default function Form({
           <option value="Caixa">Caixa</option>
         </select>
       </div>
-      <h1>arrumar o reaload</h1>
-      {typeMovimentação === "Caixa" ? (
-        <Input
-          text="DESCRIÇÃO"
-          placeholder="Digite a Descrição aqui"
-          type="text"
-          id="descricao"
-          name="descricao"
-          className={style.input}
-        />
-      ) : (
-        <div className={style.selectInput}>
-          <label>DESCRIÇÃO</label>
-          <select id="descricao" onChange={handleValida}>
-            <option value="">Selecione</option>
-            <option value="ferro">Ferro</option>
-            <option value="plastico">Plastico</option>
-            <option value="papelao">Papelao</option>
-            {AtivarOption && (
-              <>
-                <option value="funcionarios">Funcionarios</option>
-                <option value="gastosEmpresa">Gastos da empresa</option>
-              </>
-            )}
-          </select>
-        </div>
-      )}
+
+      <Input
+        text="DESCRIÇÃO"
+        placeholder="Digite a Descrição aqui"
+        type="text"
+        id="descricao"
+        name="descricao"
+        className={style.input}
+      />
+
       {typeQuantidade === "especifique" ? (
         <Input
           text="ESPECIFIQUE"

@@ -213,7 +213,10 @@ export default function Table({
               gastoscadastro={gastosEmpresa}
             />
           </div>
-
+        </section>
+      )}
+      {!isReportsPage && (
+        <section className={style.overview}>
           <div className={style.filter}>
             <div>
               <label htmlFor="monthFilter">Filtrar por mês: </label>
@@ -246,7 +249,7 @@ export default function Table({
             <th>descrição</th>
             <th>quantidade(KG)</th>
             <th>valor</th>
-            {!isMobile && <th>preço por KG</th>}
+
             {!isReportsPage && (
               <>
                 <th>Editar</th>
@@ -324,15 +327,7 @@ export default function Table({
                     >
                       {valor}
                     </td>
-                    {!isMobile && (
-                      <td>
-                        {movimentacao === "Caixa" ||
-                        descricao === "funcionarios" ||
-                        descricao === "gastosEmpresa"
-                          ? "-"
-                          : parseFloat(valor / quantidade).toFixed(2)}
-                      </td>
-                    )}
+
                     {!isReportsPage && (
                       <>
                         <td>

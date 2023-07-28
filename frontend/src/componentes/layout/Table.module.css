@@ -62,8 +62,7 @@ section table th {
 /* Style the table cells (data) */
 section table td {
   padding: 8px;
-  color:rgb(0, 0, 0);
-  cursor: pointer;
+  color: #524f4f;
 }
 
 /* Apply hover effect on table rows */
@@ -74,4 +73,11 @@ section table tbody tr:hover {
   box-shadow: 0 0 5px #c4c4c4;
   transition: all 0.2s;
   font-weight: bolder;
+}
+
+section table button {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #fff;
+  padding: 5px;
+  cursor: pointer;
 }
