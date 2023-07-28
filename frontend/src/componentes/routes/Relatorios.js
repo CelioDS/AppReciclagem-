@@ -32,6 +32,7 @@ export default function Relatorios() {
   return (
     <main className={style.main}>
       <h1> Estoque</h1>
+
       <Table arrayDB={arrayDB} currentPage={"relatorios"} />
     </main>
   );

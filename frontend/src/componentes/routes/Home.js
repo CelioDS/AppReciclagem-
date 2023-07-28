@@ -38,6 +38,7 @@ export default function Home() {
       const res = await axios.get(process.env.REACT_APP_DB_API);
       const filteredData = filterByCurrentMonth(res.data.reverse());
       setArrayDB(filteredData);
+      console.log("aa")
     } catch (error) {
       toast.error(error);
     }

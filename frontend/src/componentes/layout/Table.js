@@ -248,7 +248,7 @@ export default function Table({ currentPage, setEditCadastro }) {
                     {month.label}
                   </option>
                 ))}
-              </select>{" "}
+              </select>
             </div>
             <button onClick={exportToCSV}>
               <span>
@@ -268,12 +268,16 @@ export default function Table({ currentPage, setEditCadastro }) {
             <th>quantidade(KG)</th>
             <th>valor</th>
             {!isMobile && <th>preço por KG</th>}
-            <th>Editar</th>
-            <th>Excluir</th>
+            {!isReportsPage && (
+              <>
+                <th>Editar</th>
+                <th>Excluir</th>
+              </>
+            )}
           </tr>
         </thead>
         <tbody>
-          {saida === 0 && caixa === 0 && entrada === 0 && (
+          {isReportsPage && saida === 0 && caixa === 0 && entrada === 0 && (
             <tr>
               <td key={1} colSpan={7}>
                 <h4>Sem cadastros!!!</h4>
@@ -281,6 +285,7 @@ export default function Table({ currentPage, setEditCadastro }) {
               </td>
             </tr>
           )}
+
           {arrayDB.length === 0 ? (
             <tr>
               <td colSpan={7}>
@@ -349,24 +354,28 @@ export default function Table({ currentPage, setEditCadastro }) {
                           : parseFloat(valor / quantidade).toFixed(2)}
                       </td>
                     )}
-                    <td>
-                      <button
-                        onClick={() => {
-                          handleEditar(arrayDB);
-                        }}
-                      >
-                        <FaPen />
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        onClick={() => {
-                          handleExcluir(id);
-                        }}
-                      >
-                        <FaTrash />
-                      </button>
-                    </td>
+                    {!isReportsPage && (
+                      <>
+                        <td>
+                          <button
+                            onClick={() => {
+                              handleEditar(arrayDB);
+                            }}
+                          >
+                            <FaPen />
+                          </button>
+                        </td>
+                        <td>
+                          <button
+                            onClick={() => {
+                              handleExcluir(id);
+                            }}
+                          >
+                            <FaTrash />
+                          </button>
+                        </td>
+                      </>
+                    )}
                   </tr>
                 )
               )
