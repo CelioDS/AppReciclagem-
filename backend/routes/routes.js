@@ -1,10 +1,10 @@
 import express from "express";
 
 import {
-  deleteDB,
   getDB,
   setDB,
   updateDB,
+  deleteDB,
 } from "../controllers/controllers.js";
 
 const router = express.Router();
@@ -13,8 +13,8 @@ router.get("/", getDB);
 
 router.post("/", setDB);
 
-router.put("/", updateDB);
+router.put("/:id", updateDB);
 
-router.delete("/", deleteDB);
+router.delete("/:id", deleteDB);
 
 export default router;

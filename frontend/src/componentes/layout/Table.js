@@ -316,7 +316,11 @@ export default function Table({ arrayDB, currentPage }) {
                       </button>
                     </td>
                     <td>
-                      <button onClick={remover(id)}>
+                      <button
+                        onClick={() => {
+                          remover(id);
+                        }}
+                      >
                         <FaTrash />
                       </button>
                     </td>
