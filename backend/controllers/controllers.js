@@ -34,7 +34,6 @@ export const updateDB = (req, res) => {
   const query =
     "UPDATE sucatas SET `dataNew` = ?, `movimentacao` = ?, `descricao` = ?, `quantidade` = ?, `valor` = ?,";
   const values = [
-    req.body.dataNew,
     req.body.movimentacao,
     req.body.descricao,
     req.body.quantidade,

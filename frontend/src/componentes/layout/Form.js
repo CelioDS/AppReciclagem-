@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import axios from "axios";
 
@@ -8,7 +8,7 @@ import Input from "../layout/Input";
 
 import style from "./Form.module.css";
 
-export default function Form({ GetDB }) {
+export default function Form({ GetDB, EditCadastro, setEditCadastro }) {
   const [isSubmit, setIsSubmit] = useState(false);
   const [typeMovimentação, setTypeMovimentação] = useState();
   const [typeQuantidade, setTypeQuantidade] = useState("");
@@ -17,6 +17,17 @@ export default function Form({ GetDB }) {
   const [currentDate, setCurrentDate] = useState(
     new Date().toISOString().split("T")[0]
   ); // Estado para controlar o valor do campo de data
+
+  useEffect(() => {
+    if (EditCadastro) {
+      const dadosForm = ref.current;
+
+      dadosForm.movimentacao.value = EditCadastro[0].movimentacao;
+      dadosForm.quantidade.value = EditCadastro[0].quantidade;
+      dadosForm.descricao.value = EditCadastro[0].descricao;
+      dadosForm.valor.value = EditCadastro[0].valor;
+    }
+  }, [EditCadastro]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -35,6 +46,17 @@ export default function Form({ GetDB }) {
     ) {
       setIsSubmit(false); // Reabilita o botão após o envio do formulário
       return toast.warn("Preencha todos os campos!!!");
+    }
+    if (EditCadastro) {
+      await axios
+        .put(process.env.REACT_APP_DB_API + EditCadastro.id, {
+          movimentacao: dadosForm.movimentacao.value,
+          descricao: dadosForm.descricao.value,
+          quantidade: dadosForm.quantidade.value,
+          valor: dadosForm.valor.value,
+        })
+        .then(({ data }) => toast.success(data))
+        .catch(({ data }) => toast.error(data));
     } else {
       const dataParts = dadosForm.dataNew.value.split("-");
       const dataInvertida = dataParts.reverse().join("-");
@@ -56,6 +78,7 @@ export default function Form({ GetDB }) {
     dadosForm.valor.value = "";
 
     GetDB();
+    setEditCadastro(null)
     setIsSubmit(false); // Reabilita o botão após o envio do formulário
   }
   function handleNumber(e) {

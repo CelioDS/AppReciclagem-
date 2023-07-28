@@ -14,6 +14,7 @@ export default function Home() {
   const [funcionarios, setFuncionarios] = useState([]);
   const [gastosEmpresa, setgastosEmpresa] = useState([]);
   const [arrayDB, setArrayDB] = useState([]);
+  const [EditCadastro, setEditCadastro] = useState(null);
 
   function filterByCurrentMonth(dataArray) {
     const currentDate = new Date();
@@ -108,8 +109,12 @@ export default function Home() {
         funcionarios={funcionarios}
         gastosEmpresa={gastosEmpresa}
       />
-      <Form GetDB={GetDB} />
-      <Table />
+      <Form
+        GetDB={GetDB}
+        EditCadastro={EditCadastro}
+        setEditCadastro={setEditCadastro}
+      />
+      <Table setEditCadastro={setEditCadastro} />
     </main>
   );
 }

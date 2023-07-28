@@ -9,7 +9,7 @@ import Loading from "./Loading";
 import Estoque from "./Estoque";
 import Header from "./Header";
 
-export default function Table({ currentPage }) {
+export default function Table({ currentPage, setEditCadastro }) {
   const checkMobile = useCallback(Mobile, []);
   const isMobile = checkMobile();
 
@@ -206,9 +206,6 @@ export default function Table({ currentPage }) {
     link.click();
   }
 
-  async function handleEditar(id) {
-    console.log(id);
-  }
   async function handleExcluir(id) {
     await axios
       .delete(process.env.REACT_APP_DB_API + id)
@@ -220,6 +217,9 @@ export default function Table({ currentPage }) {
       .catch(({ data }) => toast.error(data));
   }
 
+  async function handleEditar(cadastro) {
+    setEditCadastro(cadastro);
+  }
   return (
     <section>
       {isReportsPage && (
@@ -352,7 +352,7 @@ export default function Table({ currentPage }) {
                     <td>
                       <button
                         onClick={() => {
-                          handleEditar(id);
+                          handleEditar(arrayDB);
                         }}
                       >
                         <FaPen />
