@@ -46,3 +46,13 @@ export const updateDB = (req, res) => {
     return res.status(200).json("Cadastrado  atualizado... ");
   });
 };
+
+export const deleteDB = (req, res) => {
+  const query = "DELETE FROM sucatas WHERE `id` = ? ";
+
+  db.query(query, [req.params.id], (err) => {
+    if (err) return res.json(err);
+
+    return res.status(200).json("Cadastro deletado com Sucesso...");
+  });
+};
