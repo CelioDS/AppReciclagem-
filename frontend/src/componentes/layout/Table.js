@@ -132,7 +132,7 @@ export default function Table({ arrayDB, currentPage }) {
     ];
 
     // Dados do arrayDB filtrados pelo mês selecionado
-    const filteredData = arrayDB.filter(({ dataNew }) => {
+    const filteredData = arrayDb.filter(({ dataNew }) => {
       if (!searchMonth) return true;
       const partMonth = dataNew.split("-");
       const month = partMonth[1];
@@ -253,12 +253,12 @@ export default function Table({ arrayDB, currentPage }) {
               </td>
             </tr>
           )}
-          {arrayDB.length === 0 ? (
+          {arrayDb.length === 0 ? (
             <tr>
               <td colSpan={7}></td>
             </tr>
           ) : (
-            arrayDB
+            arrayDb
               .filter(({ dataNew }) => {
                 /* filtar o mes */
                 if (!searchMonth) return true;
