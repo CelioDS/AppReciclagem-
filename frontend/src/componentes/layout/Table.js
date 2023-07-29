@@ -11,8 +11,8 @@ import Header from "./Header";
 
 export default function Table({
   currentPage,
-  setEditCadastro,
   arrayDB,
+  setEditCadastro,
   setArrayDB,
 }) {
   const checkMobile = useCallback(Mobile, []);
@@ -20,6 +20,7 @@ export default function Table({
 
   const [searchMonth, setSearchMonth] = useState("");
   // No início do componente, antes da função 'return'
+  const isReportsPage = currentPage === "relatorios";
   const [caixa, setCaixa] = useState(0);
   const [entrada, setEntrada] = useState(0);
   const [saida, setSaida] = useState(0);
@@ -118,7 +119,6 @@ export default function Table({
     { value: "11", label: "Novembro" },
     { value: "12", label: "Dezembro" },
   ];
-  const isReportsPage = currentPage === "relatorios";
 
   function exportToCSV() {
     //aciona o nome ao arquivo

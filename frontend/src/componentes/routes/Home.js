@@ -115,7 +115,11 @@ export default function Home() {
         setEditCadastro={setEditCadastro}
         setArrayDB={setArrayDB}
       />
-      <Table setEditCadastro={setEditCadastro} arrayDB={arrayDB} setArrayDB={setArrayDB}/>
+      <Table
+        setEditCadastro={setEditCadastro}
+        arrayDB={arrayDB}
+        setArrayDB={setArrayDB}
+      />
     </main>
   );
 }
