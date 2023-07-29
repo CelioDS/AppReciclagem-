@@ -215,7 +215,7 @@ export default function Table({
           </div>
         </section>
       )}
-      {!isReportsPage && (
+      {isReportsPage && (
         <section className={style.overview}>
           <div className={style.filter}>
             <div>
@@ -283,76 +283,67 @@ export default function Table({
                 const month = partMonth[1];
                 return month === searchMonth;
               })
-              .map(
-                ({
-                  id,
-                  dataNew,
-                  descricao,
-                  quantidade,
-                  movimentacao,
-                  valor,
-                }) => (
-                  <tr
-                    key={id}
+              .map((cadastro, key) => (
+                <tr
+                  key={key}
+                  style={
+                    cadastro.movimentacao === "Entrada"
+                      ? { background: "#d9f0cf" }
+                      : cadastro.movimentacao === "Saida"
+                      ? { color: "#800303fb", background: "#FFC0CB" }
+                      : { color: "#0099ff", background: "#87CEEB" } // Terceiro valor para outra movimentação
+                  }
+                >
+                  {!isMobile && <td>{cadastro.dataNew}</td>}
+                  <td
                     style={
-                      movimentacao === "Entrada"
-                        ? { background: "#d9f0cf" }
-                        : movimentacao === "Saida"
-                        ? { color: "#800303fb", background: "#FFC0CB" }
-                        : { color: "#0099ff", background: "#87CEEB" } // Terceiro valor para outra movimentação
+                      cadastro.movimentacao === "Entrada"
+                        ? { color: "#008000" }
+                        : cadastro.movimentacao === "Saida"
+                        ? { color: "#800303fb" }
+                        : { color: "#0099ff" } // Terceiro valor para outra movimentação
                     }
                   >
-                    {!isMobile && <td>{dataNew}</td>}
-                    <td
-                      style={
-                        movimentacao === "Entrada"
-                          ? { color: "#008000" }
-                          : movimentacao === "Saida"
-                          ? { color: "#800303fb" }
-                          : { color: "#0099ff" } // Terceiro valor para outra movimentação
-                      }
-                    >
-                      {movimentacao}
-                    </td>
-                    <td>{descricao}</td>
-                    <td>{quantidade}</td>
-                    <td
-                      style={
-                        movimentacao === "Entrada"
-                          ? { color: "#008000", background: "#d9f0cf" }
-                          : movimentacao === "Saida"
-                          ? { background: "#FFC0CB" }
-                          : { background: "#87CEEB" } // Terceiro valor para outra movimentação
-                      }
-                    >
-                      {valor}
-                    </td>
+                    {cadastro.movimentacao}
+                  </td>
+                  <td>{cadastro.descricao}</td>
+                  <td>{cadastro.quantidade}</td>
+                  <td
+                    style={
+                      cadastro.movimentacao === "Entrada"
+                        ? { color: "#008000", background: "#d9f0cf" }
+                        : cadastro.movimentacao === "Saida"
+                        ? { background: "#FFC0CB" }
+                        : { background: "#87CEEB" } // Terceiro valor para outra movimentação
+                    }
+                  >
+                    {cadastro.valor}
+                  </td>
 
-                    {!isReportsPage && (
-                      <>
-                        <td>
-                          <button
-                            onClick={() => {
-                              handleEditar(arrayDB);
-                            }}
-                          >
-                            <FaPen />
-                          </button>
-                        </td>
-                        <td>
-                          <button
-                            onClick={() => {
-                              handleExcluir(id);
-                            }}
-                          >
-                            <FaTrash />
-                          </button>
-                        </td>
-                      </>
-                    )}
-                  </tr>
-                )
-              )
+                  {!isReportsPage && (
+                    <>
+                      <td>
+                        <button
+                          onClick={() => {
+                            handleEditar(cadastro);
+                          }}
+                        >
+                          <FaPen />
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          onClick={() => {
+                            handleExcluir(cadastro.id);
+                          }}
+                        >
+                          <FaTrash />
+                        </button>
+                      </td>
+                    </>
+                  )}
+                </tr>
+              ))
           )}
         </tbody>
       </table>

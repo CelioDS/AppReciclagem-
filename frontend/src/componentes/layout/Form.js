@@ -22,10 +22,10 @@ export default function Form({ GetDB, EditCadastro, setEditCadastro }) {
     if (EditCadastro) {
       const dadosForm = ref.current;
 
-      dadosForm.movimentacao.value = EditCadastro[0].movimentacao;
-      dadosForm.quantidade.value = EditCadastro[0].quantidade;
-      dadosForm.descricao.value = EditCadastro[0].descricao;
-      dadosForm.valor.value = EditCadastro[0].valor;
+      dadosForm.movimentacao.value = EditCadastro.movimentacao;
+      dadosForm.quantidade.value = EditCadastro.quantidade;
+      dadosForm.descricao.value = EditCadastro.descricao;
+      dadosForm.valor.value = EditCadastro.valor;
     }
   }, [EditCadastro]);
 
@@ -48,7 +48,7 @@ export default function Form({ GetDB, EditCadastro, setEditCadastro }) {
     }
     if (EditCadastro) {
       await axios
-        .put(process.env.REACT_APP_DB_API + EditCadastro[0].id, {
+        .put(process.env.REACT_APP_DB_API + EditCadastro.id, {
           movimentacao: dadosForm.movimentacao.value,
           descricao: dadosForm.descricao.value,
           quantidade: dadosForm.quantidade.value,
