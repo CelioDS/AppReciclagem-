@@ -9,8 +9,8 @@ import { useEffect, useState } from "react";
 
 // 4- nagegando entre paginas
 function App() {
-  const [user, setUser] = useState(localStorage.getItem("user") || "*jcsucatas123");
-  const [pass, setPass] = useState(localStorage.getItem("pass") || "jcsucatas");
+  const [user, setUser] = useState(localStorage.getItem("user") || "jcsucatas");
+  const [pass, setPass] = useState(localStorage.getItem("pass") || "*jcsucatas123");
   const [permission, setPermission] = useState(false);
   const [erro, seterro] = useState(false);
 
